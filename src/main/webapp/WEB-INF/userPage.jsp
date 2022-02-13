@@ -18,9 +18,9 @@
         <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2">Library</span> </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Search</a>
+                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/user">Search</a>
                 <a class="nav-link" href="#">Profile</a>
-                <a class="nav-link" href="#">Orders and subscriptions</a>
+                <a class="nav-link" href="#">Subscriptions</a>
             </div>
         </div>
         <form class="d-flex">
@@ -37,10 +37,10 @@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <form><a class="dropdown-item" href="${pageContext.request.contextPath}/user">Sort by name</a></form>
-                <form><a class="dropdown-item" href="${pageContext.request.contextPath}/user">Sort by author</a></form>
-                <form><a class="dropdown-item" href="${pageContext.request.contextPath}/user">Sort by edition</a></form>
-                <form><a class="dropdown-item" href="${pageContext.request.contextPath}/user">Sort by year edition</a></form>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_name">Sort by name</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_author">Sort by author</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_edition">Sort by edition</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_year_edition">Sort by year edition</a>
             </ul>
         </div>
     </div>

@@ -15,6 +15,7 @@ public class SignupPostCommand implements ServletCommand {
     private static String signupPage;
     private static String homepage;
     private static String errorpage;
+    private static String userpage;
 
     public SignupPostCommand() {
         userService=new UserService(UserDaoImpl.getInstance());
@@ -22,6 +23,7 @@ public class SignupPostCommand implements ServletCommand {
         signupPage = properties.getProperty("signupPagePost");
         homepage = properties.getProperty("homePagePost");
         errorpage = properties.getProperty("errorPagePost");
+        userpage=properties.getProperty("userPagePost");
     }
 
     @Override
@@ -35,7 +37,7 @@ public class SignupPostCommand implements ServletCommand {
             if(userService.checkLogin(login)) resultPage=errorpage;
             else {
                 userService.signUp(new User(1,login,password,name,surname, UserRole.USER.ordinal()));
-                resultPage = homepage;
+                resultPage = userpage;
             }
         }
         return resultPage;

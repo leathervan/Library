@@ -8,6 +8,7 @@ import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,8 @@ public class UserPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session= req.getSession();
+        System.out.println(session.getAttribute("user"));
         List<Book> books=bookService.getAllBook();
         req.setAttribute("countPage",(books.size()/countPage));//pagination view
         req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start

@@ -8,4 +8,6 @@ import entity.user.User;
 public interface ReceiptDao extends DAO<Receipt> {
     Receipt createReceipt(User user, Book book);
     Receipt changeReceiptStatus(Receipt receipt,String status);
+
+    Receipt getReceiptByUserAndBookId(String user_id, String book_id);
 }

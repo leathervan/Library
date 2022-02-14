@@ -34,10 +34,14 @@ public class SignupPostCommand implements ServletCommand {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         if (login != null && password != null && name!=null && surname!=null) {
-            if(userService.checkLogin(login)) resultPage=errorpage;
-            else {
-                userService.signUp(new User(1,login,password,name,surname, UserRole.USER.ordinal()));
-                resultPage = userpage;
+            if(login.length() > 0 && password.length() > 0 && name.length()>0 && surname.length()>0){
+                if(userService.checkLogin(login)) resultPage=errorpage;
+                else {
+                    User user=new User(1,login,password,name,surname, UserRole.USER.ordinal());
+                    userService.signUp(user);
+                    UserService.putToSession(req,user);
+                    resultPage = userpage;
+                }
             }
         }
         return resultPage;

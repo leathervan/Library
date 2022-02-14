@@ -34,4 +34,7 @@ public class ReceiptService {
     public Receipt changeStatus(Receipt receipt,String status){
         return receiptDao.changeReceiptStatus(receipt,status);
     }
+    public Receipt getReceiptByUserAndBookId(String user_id, String book_id) {;
+        return receiptDao.getReceiptByUserAndBookId(user_id, book_id);
+    }
 }

@@ -3,6 +3,8 @@ package service;
 import dao.user.UserDao;
 import entity.user.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class UserService {
@@ -34,5 +36,22 @@ public class UserService {
 
     public boolean checkLogin(String login){
         return userDao.checkLogin(login)!=null;
+    }
+
+    public static void putToSession(HttpServletRequest req, User user) {
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
+        switch (user.getRole_id()) {
+            case 1:
+                session.setAttribute("role", "admin");
+                break;
+            case 2:
+                session.setAttribute("role", "manager");
+                break;
+            case 3:
+                session.setAttribute("role", "user");
+                break;
+        }
+        session.setAttribute("authorized", true);
     }
 }

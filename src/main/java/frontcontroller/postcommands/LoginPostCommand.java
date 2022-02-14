@@ -33,7 +33,10 @@ public class LoginPostCommand implements ServletCommand {
         String password = req.getParameter("password");
         if (login.length() > 0 && password.length() > 0) {
             User user = userService.getUserByCredentials(login, password);
-            if (user != null) resultPage = userpage;
+            if (user != null) {
+                UserService.putToSession(req,user);
+                resultPage = userpage;
+            }
         }
         return resultPage;
     }

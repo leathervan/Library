@@ -73,7 +73,7 @@
             <td><c:out value="${book.getEdition()}"/></td>
             <td><c:out value="${book.getYear_edition()}"/></td>
             <td><c:out value="${book.getAmount()}"/></td>
-            <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/user">Order book</a></td>
+            <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/orderbook?bookID=${book.getId()}&userID=${user.getId()}">Order book</a></td>
         </tr>
     </c:forEach>
     </tbody>

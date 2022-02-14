@@ -26,7 +26,8 @@ public enum QUERY {
     EDIT_RECEIPT("update receipt set user_id = ?,book_id = ?,receipt_status_id = ? where id = ?"),
     GET_ALL_RECEIPT("select * from receipt"),
     GET_RECEIPT("select * from receipt where id = ?"),
-    CHANGE_RECEIP_STATUS("update receipt set receipt_status_id = ? where id = ?"),
+    CHANGE_RECEIPT_STATUS("update receipt set receipt_status_id = ? where id = ?"),
+    GET_RECEIPT_BY_USER_ID_AND_BOOK_ID("select * from receipt where user_id = ? and book_id = ?"),
 
     GET_SUBSCRIPTION("select * from subscription where id = ?"),
     DELETE_SUBSCRIPTION("delete from subscription where id = ?"),

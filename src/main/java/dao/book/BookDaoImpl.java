@@ -66,7 +66,7 @@ public class BookDaoImpl implements BookDao{
     public Book create(Book book) {
         Connection connection= connectionPool.getConnection();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_BOOK.query());
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_BOOK.query(),Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,book.getName());
             pstmt.setString(2,book.getAuthor());
             pstmt.setString(3,book.getEdition());

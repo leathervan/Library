@@ -68,7 +68,7 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
     public Subscription create(Subscription subscription) {
         Connection connection= connectionPool.getConnection();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_SUBSCRIPTION.query());
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_SUBSCRIPTION.query(),Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,String.valueOf(subscription.getEnd()));
             pstmt.setString(2,String.valueOf(subscription.getUser_id()));
             pstmt.setString(3,String.valueOf(subscription.getBook_id()));

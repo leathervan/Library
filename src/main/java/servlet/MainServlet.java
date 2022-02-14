@@ -19,7 +19,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Processing GET request");
+        System.out.println("GET");
         ServletCommand command = commandManager.getGetCommand(req);
         String loadedPage = command.execute(req, resp);
         req.getRequestDispatcher(loadedPage).forward(req, resp);

@@ -37,14 +37,21 @@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_name">Sort by name</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_author">Sort by author</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_edition">Sort by edition</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_search_by_year_edition">Sort by year edition</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_name">Sort by name</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_author">Sort by author</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_edition">Sort by edition</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_year_edition">Sort by year edition</a>
             </ul>
         </div>
     </div>
 </form>
+<nav aria-label="...">
+    <ul class="pagination pagination-sm">
+        <c:forEach begin="1" end="${countPage}" var="i">
+            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/user?page=${i}">${i}</a></li>
+        </c:forEach>
+    </ul>
+</nav>
 <table class="table">
     <thead class="table-dark">
     <tr>

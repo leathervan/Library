@@ -24,7 +24,7 @@ public class UserPagePostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        List<Book> books=new ArrayList<>();
+/*        List<Book> books=new ArrayList<>();
         String search=req.getParameter("search");
         System.out.println(search);
         if(search.length()>0){
@@ -34,7 +34,7 @@ public class UserPagePostCommand implements ServletCommand {
                 if(books!=null) req.setAttribute("books",books);
             }
             else req.setAttribute("books",books);
-        }
+        }*/
         return userPage;
     }
 }

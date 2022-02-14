@@ -20,10 +20,10 @@ public class CommandManager {
         getCommands.put("/signup", new SignupGetCommand());
         getCommands.put("/error", new ErrorGetCommand());
         getCommands.put("/user", new UserPageGetCommand());
-        getCommands.put("/user_search_by_name", new SearchByNameGetCommand());
-        getCommands.put("/user_search_by_author", new SearchByAuthorGetCommand());
-        getCommands.put("/user_search_by_edition", new SearchByEditionGetCommand());
-        getCommands.put("/user_search_by_year_edition", new SearchByYearEditionGetCommand());
+        getCommands.put("/user_sort_by_name", new SortByNameGetCommand());
+        getCommands.put("/user_sort_by_author", new SortByAuthorGetCommand());
+        getCommands.put("/user_sort_by_edition", new SortByEditionGetCommand());
+        getCommands.put("/user_sort_by_year_edition", new SortByYearEditionGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());

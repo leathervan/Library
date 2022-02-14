@@ -52,7 +52,7 @@
         </c:forEach>
     </ul>
 </nav>
-<table class="table">
+<table class="table w-75 p-3">
     <thead class="table-dark">
     <tr>
         <th scope="col">id</th>
@@ -61,6 +61,7 @@
         <th scope="col">Edition</th>
         <th scope="col">Year Edition</th>
         <th scope="col">Amount</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -72,6 +73,7 @@
             <td><c:out value="${book.getEdition()}"/></td>
             <td><c:out value="${book.getYear_edition()}"/></td>
             <td><c:out value="${book.getAmount()}"/></td>
+            <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/user">Order book</a></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -39,7 +39,7 @@
                             </div>
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
                             <form action="${pageContext.request.contextPath}/signup">
-                                <a href="${pageContext.request.contextPath}/login" class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;" type="submit"> Login</a>
+                                <a href="${pageContext.request.contextPath}/login" class="btn btn-lg btn-block btn-secondary" type="submit"> Login</a>
                             </form>
                         </div>
                     </form>

@@ -30,7 +30,7 @@
                             </div>
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             <form action="${pageContext.request.contextPath}/signup">
-                                <a href="${pageContext.request.contextPath}/signup" class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;" type="submit"> Sign Up</a>
+                                <a href="${pageContext.request.contextPath}/signup" class="btn btn-lg btn-block btn-secondary" type="submit"> Sign Up</a>
                             </form>
                         </div>
                     </form>

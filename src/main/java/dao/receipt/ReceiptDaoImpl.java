@@ -49,7 +49,7 @@ public class ReceiptDaoImpl implements ReceiptDao{
     @Override
     public List<Receipt> getAll() {
         Connection connection= connectionPool.getConnection();
-        List<Receipt> receipts=new ArrayList<>();;
+        List<Receipt> receipts=new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs= stmt.executeQuery(QUERY.GET_ALL_RECEIPT.query());
@@ -132,11 +132,11 @@ public class ReceiptDaoImpl implements ReceiptDao{
     }
 
     @Override
-    public Receipt changeReceiptStatus(Receipt receipt,String status) {
+    public Receipt changeReceiptStatus(Receipt receipt,int status) {
         Connection connection= connectionPool.getConnection();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_RECEIPT.query());
-            pstmt.setString(1, String.valueOf(ReceiptStatus.valueOf(status).ordinal()));
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.CHANGE_RECEIPT_STATUS.query());
+            pstmt.setString(1, String.valueOf(status));
             pstmt.setString(2, String.valueOf(receipt.getId()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
@@ -157,7 +157,7 @@ public class ReceiptDaoImpl implements ReceiptDao{
         finally {
             connectionPool.releaseConnection(connection);
         }
-        receipt.setStatus(ReceiptStatus.valueOf(status).ordinal());
+        receipt.setStatus(status);
         return receipt;
     }
 
@@ -180,5 +180,25 @@ public class ReceiptDaoImpl implements ReceiptDao{
             connectionPool.releaseConnection(connection);
         }
         return receipt;
+    }
+
+    @Override
+    public List<Receipt> getReceiptsByUserId(User user) {
+        List<Receipt> receipts=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_RECEIPT_BY_USER_ID.query());
+            pstmt.setString(1,String.valueOf(user.getId()));
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                receipts.add(new Receipt(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4)));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return receipts;
     }
 }

@@ -238,4 +238,34 @@ public class BookDaoImpl implements BookDao{
         }
         return books;
     }
+
+    @Override
+    public void increaseBookAmount(Book book) {
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.INCREASE_AMOUNT_OF_BOOK.query());
+            pstmt.setString(1,String.valueOf(book.getId()));
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public void decreaseBookAmount(Book book) {
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.DECREASE_AMOUNT_OF_BOOK.query());
+            pstmt.setString(1,String.valueOf(book.getId()));
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
 }

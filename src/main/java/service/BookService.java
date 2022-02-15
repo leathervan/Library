@@ -58,4 +58,10 @@ public class BookService {
     public List<Book> sortByYearEdition(){
         return bookDao.sortByYearEdition();
     }
+    public void increaseBookAmount(Book book){
+        bookDao.increaseBookAmount(book);
+    }
+    public void decreaseBookAmount(Book book){
+        bookDao.decreaseBookAmount(book);
+    }
 }

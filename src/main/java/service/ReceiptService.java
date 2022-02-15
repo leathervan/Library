@@ -31,10 +31,16 @@ public class ReceiptService {
     public boolean createReceipt(User user,Book book){
         return user != null && book!=null && receiptDao.createReceipt(user,book).getId() != -1;
     }
-    public Receipt changeStatus(Receipt receipt,String status){
+    public Receipt getReceipt(long id){
+        return receiptDao.get(id);
+    }
+    public Receipt changeStatus(Receipt receipt,int status){
         return receiptDao.changeReceiptStatus(receipt,status);
     }
     public Receipt getReceiptByUserAndBookId(String user_id, String book_id) {;
         return receiptDao.getReceiptByUserAndBookId(user_id, book_id);
+    }
+    public List<Receipt> getReceiptsByUserId(User user) {;
+        return receiptDao.getReceiptsByUserId(user);
     }
 }

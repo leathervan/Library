@@ -27,17 +27,14 @@ public class UserPageGetCommand implements ServletCommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session= req.getSession();
-        System.out.println(session.getAttribute("user"));
         List<Book> books=bookService.getAllBook();
-        req.setAttribute("countPage",(books.size()/countPage));//pagination view
-        req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start
 
-        if(req.getParameter("page") != null){
-            int number = Integer.valueOf(req.getParameter("page"));
-            books=bookService.getAllBook().stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
-            req.setAttribute("books",books);
-        }
+        pagination(req,books);
+        searchBooks(req,books);
+        return userPage;
+    }
 
+    private void searchBooks(HttpServletRequest req,List<Book> books){
         String search = req.getParameter("search");
         if(search != null && search.length()>0){
             if(books!=null) {
@@ -53,7 +50,16 @@ public class UserPageGetCommand implements ServletCommand {
             }
             if(books.size()<=2) req.setAttribute("countPage",1);
             else req.setAttribute("countPage",(books.size()/countPage));
-        }//search
-        return userPage;
+        }
+    }
+    private void pagination(HttpServletRequest req,List<Book> books){
+        req.setAttribute("countPage",(books.size()/countPage));//pagination view
+        req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start
+
+        if(req.getParameter("page") != null){
+            int number = Integer.valueOf(req.getParameter("page"));
+            books=bookService.getAllBook().stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
+            req.setAttribute("books",books);
+        }
     }
 }

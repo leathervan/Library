@@ -4,6 +4,7 @@ import dao.book.BookDao;
 import dao.subscription.SubscriptionDao;
 import entity.Book;
 import entity.Subscription;
+import entity.user.User;
 
 import java.util.List;
 
@@ -34,5 +35,8 @@ public class SubscriptionService {
 
     public List<Subscription> getAllSubscription(){
         return subscriptionDao.getAll();
+    }
+    public List<Subscription> getUserSubscription(User user){
+        return subscriptionDao.getUserAll(user);
     }
 }

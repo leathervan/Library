@@ -25,6 +25,9 @@ public class CommandManager {
         getCommands.put("/user_sort_by_edition", new SortByEditionGetCommand());
         getCommands.put("/user_sort_by_year_edition", new SortByYearEditionGetCommand());
         getCommands.put("/orderbook", new OrderGetCommand());
+        getCommands.put("/userProfile",new UserProfileGetCommand());
+        getCommands.put("/returnbook",new ReturnBookGetCommand());
+        getCommands.put("/rejectorder", new RejectOrderGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());

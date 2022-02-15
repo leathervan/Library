@@ -12,4 +12,8 @@ public interface BookDao extends DAO<Book> {
     List<Book> sortByAuthor();
     List<Book> sortByEdition();
     List<Book> sortByYearEdition();
+
+    void increaseBookAmount(Book book);
+
+    void decreaseBookAmount(Book book);
 }

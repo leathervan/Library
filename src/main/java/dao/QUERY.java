@@ -14,6 +14,8 @@ public enum QUERY {
     GET_ALL_BOOKS("select * from book"),
     DELETE_BOOK("delete from book where id = ?"),
     EDIT_BOOK("update book set name = ?,author = ?,edtion = ?, year_edition = ?,amount = ? where id = ?"),
+    INCREASE_AMOUNT_OF_BOOK("update book set amount = amount + 1 where id = ?"),
+    DECREASE_AMOUNT_OF_BOOK("update book set amount = amount - 1 where id = ?"),
     SEARCH_BOOK_BY_AUTHOR("select * from book where author=?"),
     SEARCH_BOOK_BY_NAME("select * from book where name=?"),
     SORT_BOOK_BY_NAME("select * from book order by name"),
@@ -28,10 +30,12 @@ public enum QUERY {
     GET_RECEIPT("select * from receipt where id = ?"),
     CHANGE_RECEIPT_STATUS("update receipt set receipt_status_id = ? where id = ?"),
     GET_RECEIPT_BY_USER_ID_AND_BOOK_ID("select * from receipt where user_id = ? and book_id = ?"),
+    GET_RECEIPT_BY_USER_ID("select * from receipt where user_id = ? order by receipt_status_id"),
 
     GET_SUBSCRIPTION("select * from subscription where id = ?"),
     DELETE_SUBSCRIPTION("delete from subscription where id = ?"),
     GET_ALL_SUBSCRIPTION("select * from subscription"),
+    GET_USER_ALL_SUBSCRIPTION("select * from subscription where user_id = ?"),
     CREATE_SUBSCRIPTION("insert into subscription(start,end,user_id,book_id) values(sysdate(),?,?,?)"),
     EDIT_SUBSCRIPTION("update subscription set start = ?,end = ?,user_id = ?, book_id = ? where id = ?");
 

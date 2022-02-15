@@ -41,6 +41,7 @@ public class UserService {
     public static void putToSession(HttpServletRequest req, User user) {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+        session.setAttribute("id",user.getId());
         switch (user.getRole_id()) {
             case 1:
                 session.setAttribute("role", "admin");

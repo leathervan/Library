@@ -5,6 +5,7 @@ import dao.QUERY;
 import dao.receipt.ReceiptDaoImpl;
 import entity.Subscription;
 import entity.receipt.Receipt;
+import entity.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -126,5 +127,26 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
         finally {
             connectionPool.releaseConnection(connection);
         }
+    }
+
+    @Override
+    public List<Subscription> getUserAll(User user) {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_USER_ALL_SUBSCRIPTION.query());
+            pstmt.setString(1,String.valueOf(user.getId()));
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return subs;
     }
 }

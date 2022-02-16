@@ -70,9 +70,8 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
         Connection connection= connectionPool.getConnection();
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_SUBSCRIPTION.query(),Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,String.valueOf(subscription.getEnd()));
-            pstmt.setString(2,String.valueOf(subscription.getUser_id()));
-            pstmt.setString(3,String.valueOf(subscription.getBook_id()));
+            pstmt.setString(1,String.valueOf(subscription.getUser_id()));
+            pstmt.setString(2,String.valueOf(subscription.getBook_id()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 System.out.println("Receipt creation is failed");
@@ -101,9 +100,9 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.EDIT_SUBSCRIPTION.query());
             pstmt.setString(1,String.valueOf(newSubscription.getStart()));
-            pstmt.setString(1,String.valueOf(newSubscription.getEnd()));
-            pstmt.setString(2,String.valueOf(newSubscription.getUser_id()));
-            pstmt.setString(3,String.valueOf(newSubscription.getBook_id()));
+            pstmt.setString(2,String.valueOf(newSubscription.getEnd()));
+            pstmt.setString(3,String.valueOf(newSubscription.getUser_id()));
+            pstmt.setString(4,String.valueOf(newSubscription.getBook_id()));
             pstmt.setString(5,String.valueOf(oldSubscription.getId()));
             pstmt.executeUpdate();
         }catch (SQLException e){
@@ -148,5 +147,42 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
             connectionPool.releaseConnection(connection);
         }
         return subs;
+    }
+
+    @Override
+    public void setEndTime(Subscription subscription,String endTime) {
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.SET_SUBSCRIPTION_END.query());
+            pstmt.setString(1,endTime);
+            pstmt.setString(2,String.valueOf(subscription.getId()));
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public Subscription getSubscriptionByUserAndBookId(String user_id, String book_id) {
+        Subscription subscription=null;
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_SUBSCRIPTION_BY_USER_ID_AND_BOOK_ID.query());
+            pstmt.setString(1,user_id);
+            pstmt.setString(2,book_id);
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                subscription = new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return subscription;
     }
 }

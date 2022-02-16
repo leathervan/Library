@@ -14,8 +14,8 @@ public class ReceiptService {
     public ReceiptService(ReceiptDao receiptDao) {
         this.receiptDao = receiptDao;
     }
-    public boolean createReceipt(Receipt receipt){
-        return receipt != null && receiptDao.create(receipt).getId() != -1;
+    public Receipt createReceipt(Receipt receipt){
+        return receiptDao.create(receipt);
     }
 
     public boolean deleteReceipt(Receipt receipt){
@@ -28,8 +28,8 @@ public class ReceiptService {
         receiptDao.update(oldReceipt,newReceipt);
         return receiptDao.get(oldReceipt.getId()).equals(newReceipt);
     }
-    public boolean createReceipt(User user,Book book){
-        return user != null && book!=null && receiptDao.createReceipt(user,book).getId() != -1;
+    public Receipt createReceipt(User user,Book book){
+        return receiptDao.createReceipt(user,book);
     }
     public Receipt getReceipt(long id){
         return receiptDao.get(id);

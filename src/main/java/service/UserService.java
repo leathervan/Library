@@ -14,8 +14,8 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public boolean signUp(User user) {
-        return user != null && userDao.create(user).getId() != -1;
+    public User signUp(User user) {
+        return userDao.create(user);
     }
 
     public User getUserByCredentials(String login, String password) {;

@@ -1,7 +1,9 @@
 package frontcontroller;
 
 import frontcontroller.getcommands.*;
+import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
+import frontcontroller.postcommands.ApproveOrderPostCommand;
 import frontcontroller.postcommands.LoginPostCommand;
 import frontcontroller.postcommands.SignupPostCommand;
 
@@ -29,9 +31,11 @@ public class CommandManager {
         getCommands.put("/returnbook",new ReturnBookGetCommand());
         getCommands.put("/rejectorder", new RejectOrderGetCommand());
         getCommands.put("/worker",new WorkerPageGetCommand());
+        getCommands.put("/approve",new ApproveOrderGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
+        postCommands.put("/approve", new ApproveOrderPostCommand());
     }
 
     public ServletCommand getGetCommand(HttpServletRequest req) {

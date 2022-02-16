@@ -45,21 +45,6 @@
   </tr>
   </tbody>
 </table>
-<%--<form action="${pageContext.request.contextPath}/user">
-  <div class="input-group w-25">
-    <input type="text" id="search" name="search" class="form-control" placeholder="Input name or author's name" aria-describedby="basic-addon2">
-    <button class="btn btn-secondary" type="submit">Search</button>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
-      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-        <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_name">Sort by name</a>
-        <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_author">Sort by author</a>
-        <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_edition">Sort by edition</a>
-        <a class="dropdown-item" href="${pageContext.request.contextPath}/user_sort_by_year_edition">Sort by year edition</a>
-      </ul>
-    </div>
-  </div>
-</form>--%>
 <form class="d-flex ">
   <table class="table w-50 p-3 table-primary">
     <thead class="table-dark">

@@ -4,6 +4,7 @@ import dao.book.BookDao;
 import dao.subscription.SubscriptionDao;
 import entity.Book;
 import entity.Subscription;
+import entity.receipt.Receipt;
 import entity.user.User;
 
 import java.util.List;
@@ -14,8 +15,8 @@ public class SubscriptionService {
     public SubscriptionService(SubscriptionDao subscriptionDao) {
         this.subscriptionDao = subscriptionDao;
     }
-    public boolean createSubscription(Subscription subscription){
-        return subscription != null && subscriptionDao.create(subscription).getId() != -1;
+    public Subscription createSubscription(Subscription subscription){
+        return subscriptionDao.create(subscription);
     }
 
     public boolean deleteSubscription(Subscription subscription){
@@ -38,5 +39,11 @@ public class SubscriptionService {
     }
     public List<Subscription> getUserSubscription(User user){
         return subscriptionDao.getUserAll(user);
+    }
+    public void setEndTime(Subscription subscription,String endTime){
+        subscriptionDao.setEndTime(subscription,endTime);
+    }
+    public Subscription getSubscriptionByUserAndBookId(String user_id, String book_id) {;
+        return subscriptionDao.getSubscriptionByUserAndBookId(user_id, book_id);
     }
 }

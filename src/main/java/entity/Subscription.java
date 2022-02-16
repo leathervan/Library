@@ -20,6 +20,11 @@ public class Subscription {
         this.user_id = user_id;
         this.book_id = book_id;
     }
+    public Subscription(Integer id, Integer user_id, Integer book_id) {
+        this.id = id;
+        this.user_id = user_id;
+        this.book_id = book_id;
+    }
 
     @Override
     public String toString() {

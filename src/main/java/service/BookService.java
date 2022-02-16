@@ -12,8 +12,8 @@ public class BookService {
         this.bookDao = bookDao;
     }
 
-    public boolean createBook(Book book){
-        return book != null && bookDao.create(book).getId() != -1;
+    public Book createBook(Book book){
+        return bookDao.create(book);
     }
 
     public boolean deleteBook(Book book){

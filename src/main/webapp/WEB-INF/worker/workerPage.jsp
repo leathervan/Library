@@ -79,7 +79,7 @@
             <td><c:out value="${receipt.getBook_id()}"/></td>
             <td><c:out value="${receipt.getStatus()}"/></td>
             <c:if test="${receipt.getStatus() == 1}">
-                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approveorder?receiptID=${receipt.getId()}">Approve order</a></td>
+                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}">Approve order</a></td>
             </c:if>
         </tr>
         </c:forEach>

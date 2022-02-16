@@ -24,6 +24,7 @@ public class ApproveOrderGetCommand implements ServletCommand {
     private ReceiptService receiptService;
     private SubscriptionService subscriptionService;
     private static String approveOrderPage;
+    private static String bookNotAvailablePage;
 
     public ApproveOrderGetCommand() {
         userService =new UserService(UserDaoImpl.getInstance());
@@ -32,20 +33,23 @@ public class ApproveOrderGetCommand implements ServletCommand {
         subscriptionService=new SubscriptionService(SubscriptionDaoImpl.getInstance());
         MappingProperties properties = MappingProperties.getInstance();
         approveOrderPage = properties.getProperty("approveOrderPage");
+        bookNotAvailablePage = properties.getProperty("bookNotAvailablePage");
     }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        String resultpage = approveOrderPage;
         String receipt_id = req.getParameter("receiptID");
         Receipt receipt=receiptService.getReceipt(Integer.valueOf(receipt_id));
         Book book=bookService.getBook(receipt.getBook_id());
         User user=userService.getUserById(receipt.getUser_id());
         Subscription subscription = subscriptionService.getSubscriptionByUserAndBookId(user.getId().toString(),book.getId().toString());
-        if(subscription == null) subscription = subscriptionService.createSubscription(new Subscription(-1,user.getId(), book.getId()));
+        if(subscription == null && book.getAmount()>0) subscription = subscriptionService.createSubscription(new Subscription(-1,user.getId(), book.getId()));
+        else resultpage = bookNotAvailablePage;
         req.setAttribute("receipt",receipt);
         req.setAttribute("customer",user);
         req.setAttribute("book",book);
         req.setAttribute("sub",subscription);
-        return approveOrderPage;
+        return resultpage;
     }
 }

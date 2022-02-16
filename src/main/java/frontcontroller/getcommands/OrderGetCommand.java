@@ -42,7 +42,7 @@ public class OrderGetCommand implements ServletCommand {
                 receiptService.createReceipt(user,book);
                 return orderPage;
             }
-            if(receipt.getStatus()==4){
+            if(receipt.getStatus()==ReceiptStatus.COMPLETED.ordinal() || receipt.getStatus()==ReceiptStatus.DENIED.ordinal()){
                 receiptService.changeStatus(receipt, ReceiptStatus.EXPECTED.ordinal());
                 return orderPage;
             }

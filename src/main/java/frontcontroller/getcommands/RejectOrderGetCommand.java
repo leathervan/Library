@@ -16,21 +16,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RejectOrderGetCommand implements ServletCommand {
-    private static String rejectOrderPage;
     private ReceiptService receiptService;
+    private static String rejectOrderPage;
+    private static String errorPage;
 
     public RejectOrderGetCommand(){
         receiptService = new ReceiptService(ReceiptDaoImpl.getInstance());
         MappingProperties properties = MappingProperties.getInstance();
         rejectOrderPage = properties.getProperty("orderRejected");
+        errorPage = properties.getProperty("WEB-INF/error.jsp");
     }
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        String resultPage = rejectOrderPage;
         String receiptID = req.getParameter("receiptID");
         if(receiptID != null && receiptID.length()>0) {
             Receipt receipt=receiptService.getReceipt(Long.valueOf(receiptID));
-            receiptService.changeStatus(receipt, ReceiptStatus.DENIED.ordinal());
+            if(receipt.getStatus() == ReceiptStatus.EXPECTED.ordinal()) receiptService.changeStatus(receipt, ReceiptStatus.DENIED.ordinal());
         }
-        return rejectOrderPage;
+        return resultPage;
     }
 }

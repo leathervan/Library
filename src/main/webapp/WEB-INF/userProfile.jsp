@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/user">Search</a>
-        <a class="nav-link active" href="${pageContext.request.contextPath}/userProfile">Profile</a>
+        <a class="nav-link active" href="${pageContext.request.contextPath}/userProfile">Subscriptions and receipts</a>
       </div>
     </div>
     <form class="d-flex">

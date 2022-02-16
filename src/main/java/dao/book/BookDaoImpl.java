@@ -74,13 +74,13 @@ public class BookDaoImpl implements BookDao{
             pstmt.setString(5,String.valueOf(book.getAmount()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("Receipt creation is failed");
+                System.out.println("Book creation is failed");
             } else {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         book.setId(generatedKeys.getInt(1));
                     } else {
-                        System.out.println("Failed to create user, no obtained id");
+                        System.out.println("Failed to create book, no obtained id");
                     }
                 }
             }

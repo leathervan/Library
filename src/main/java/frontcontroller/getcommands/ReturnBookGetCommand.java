@@ -40,7 +40,7 @@ public class ReturnBookGetCommand implements ServletCommand{
             Subscription subscription=subscriptionService.getSubscription(Long.valueOf(subID));
             User user= userService.getUserById(subscription.getUser_id());
             Book book=bookService.getBook(subscription.getBook_id());
-            Receipt receipt=receiptService.createReceipt(user,book);
+            Receipt receipt=receiptService.getReceiptByUserAndBookId(user.getId().toString(),book.getId().toString());
             receiptService.changeStatus(receipt, ReceiptStatus.COMPLETED.ordinal());
             bookService.increaseBookAmount(bookService.getBook(subscription.getBook_id()));
             subscriptionService.deleteSubscription(subscription);

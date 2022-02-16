@@ -103,7 +103,7 @@ public class ReceiptDaoImpl implements ReceiptDao{
                     if (generatedKeys.next()) {
                         receipt.setId(generatedKeys.getInt(1));
                     } else {
-                        System.out.println("Failed to create user, no obtained id");
+                        System.out.println("Failed to create receipt, no obtained id");
                     }
                 }
             }
@@ -159,21 +159,11 @@ public class ReceiptDaoImpl implements ReceiptDao{
     public Receipt changeReceiptStatus(Receipt receipt,int status) {
         Connection connection= connectionPool.getConnection();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(QUERY.CHANGE_RECEIPT_STATUS.query(),Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.CHANGE_RECEIPT_STATUS.query());
             pstmt.setString(1, String.valueOf(status));
             pstmt.setString(2, String.valueOf(receipt.getId()));
             int affectedRows = pstmt.executeUpdate();
-            if (affectedRows == 0) {
-                System.out.println("Receipt creation is failed");
-            } else {
-                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        receipt.setId(generatedKeys.getInt(1));
-                    } else {
-                        System.out.println("Failed to create user, no obtained id");
-                    }
-                }
-            }
+
         }catch (SQLException e){
             e.printStackTrace();
             receipt.setId(-1);

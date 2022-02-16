@@ -25,7 +25,7 @@
                     <h1> Book not available :(</h1>
                     <br>
                     <div class="error-actions">
-                        <a href="${pageContext.request.contextPath}/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Go back </a>
+                        <a href="${pageContext.request.contextPath}/worker" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Go back </a>
                     </div>
                 </div>
             </div>

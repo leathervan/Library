@@ -60,6 +60,30 @@ public class ReceiptDaoImpl implements ReceiptDao{
         }catch (SQLException exception){
             exception.printStackTrace();
         }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return receipts;
+    }
+
+    @Override
+    public List<Receipt> getAll(String status) {
+        Connection connection= connectionPool.getConnection();
+        List<Receipt> receipts=new ArrayList<>();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_ALL_RECEIPT_BY_STATUS.query());
+            pstmt.setString(1,status);
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                receipts.add(new Receipt(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
         return receipts;
     }
 
@@ -135,7 +159,7 @@ public class ReceiptDaoImpl implements ReceiptDao{
     public Receipt changeReceiptStatus(Receipt receipt,int status) {
         Connection connection= connectionPool.getConnection();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(QUERY.CHANGE_RECEIPT_STATUS.query());
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.CHANGE_RECEIPT_STATUS.query(),Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, String.valueOf(status));
             pstmt.setString(2, String.valueOf(receipt.getId()));
             int affectedRows = pstmt.executeUpdate();

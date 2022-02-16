@@ -34,6 +34,12 @@ public class ReceiptService {
     public Receipt getReceipt(long id){
         return receiptDao.get(id);
     }
+    public List<Receipt> getAllReceipt(){
+        return receiptDao.getAll();
+    }
+    public List<Receipt> getAllReceipt(String status){
+        return receiptDao.getAll(status);
+    }
     public Receipt changeStatus(Receipt receipt,int status){
         return receiptDao.changeReceiptStatus(receipt,status);
     }

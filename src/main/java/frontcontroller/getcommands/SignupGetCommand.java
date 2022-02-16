@@ -15,7 +15,6 @@ public class SignupGetCommand implements ServletCommand {
     }
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        String resultPage = signupPage;
-        return resultPage;
+        return signupPage;
     }
 }

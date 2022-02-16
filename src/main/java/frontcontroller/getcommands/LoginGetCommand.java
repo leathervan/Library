@@ -17,7 +17,6 @@ public class LoginGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        String resultPage = loginPage;
-        return resultPage;
+        return loginPage;
     }
 }

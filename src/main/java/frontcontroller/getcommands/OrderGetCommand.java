@@ -5,6 +5,7 @@ import dao.receipt.ReceiptDaoImpl;
 import dao.user.UserDaoImpl;
 import entity.Book;
 import entity.receipt.Receipt;
+import entity.receipt.ReceiptStatus;
 import entity.user.User;
 import frontcontroller.ServletCommand;
 import service.BookService;
@@ -32,13 +33,17 @@ public class OrderGetCommand implements ServletCommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String userID = req.getParameter("userID");
-        String bookID=req.getParameter("bookID");
+        String bookID = req.getParameter("bookID");
         if(userID != null && bookID != null && userID.length()>0 && bookID.length()>0){
             Book book=bookService.getBook(Integer.valueOf(bookID));
             User user=userService.getUserById(Integer.valueOf(userID));
             Receipt receipt=receiptService.getReceiptByUserAndBookId(userID,bookID);
             if(receipt==null) {
                 receiptService.createReceipt(user,book);
+                return orderPage;
+            }
+            if(receipt.getStatus()==4){
+                receiptService.changeStatus(receipt, ReceiptStatus.EXPECTED.ordinal());
                 return orderPage;
             }
         }

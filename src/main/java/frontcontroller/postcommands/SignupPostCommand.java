@@ -6,6 +6,7 @@ import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import service.UserService;
 import util.MappingProperties;
+import util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +40,7 @@ public class SignupPostCommand implements ServletCommand {
                 else {
                     User user=new User(1,login,password,name,surname, UserRole.USER.ordinal());
                     userService.signUp(user);
-                    UserService.putToSession(req,user);
+                    UserUtil.putToSession(req,user);
                     resultPage = userpage;
                 }
             }

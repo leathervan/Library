@@ -1,9 +1,9 @@
 package frontcontroller;
 
 import frontcontroller.getcommands.*;
+import frontcontroller.getcommands.worker.WorkerPageGetCommand;
 import frontcontroller.postcommands.LoginPostCommand;
 import frontcontroller.postcommands.SignupPostCommand;
-import frontcontroller.postcommands.UserPagePostCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -28,10 +28,10 @@ public class CommandManager {
         getCommands.put("/userProfile",new UserProfileGetCommand());
         getCommands.put("/returnbook",new ReturnBookGetCommand());
         getCommands.put("/rejectorder", new RejectOrderGetCommand());
+        getCommands.put("/worker",new WorkerPageGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
-        postCommands.put("/user", new UserPagePostCommand());
     }
 
     public ServletCommand getGetCommand(HttpServletRequest req) {

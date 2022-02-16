@@ -5,6 +5,7 @@ import entity.user.User;
 import frontcontroller.ServletCommand;
 import service.UserService;
 import util.MappingProperties;
+import util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ public class LoginPostCommand implements ServletCommand {
     private static String homepage;
     private static String errorpage;
     private static String userpage;
+    private static String workerpage;
 
     public LoginPostCommand() {
         userService = new UserService(UserDaoImpl.getInstance());
@@ -24,6 +26,7 @@ public class LoginPostCommand implements ServletCommand {
         homepage = properties.getProperty("homePagePost");
         errorpage = properties.getProperty("errorPagePost");
         userpage=properties.getProperty("userPagePost");
+        workerpage = properties.getProperty("workerPagePost");
     }
 
     @Override
@@ -31,11 +34,21 @@ public class LoginPostCommand implements ServletCommand {
         String resultPage = errorpage;
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (login.length() > 0 && password.length() > 0) {
+        if (login != null && password != null && login.length() > 0 && password.length() > 0) {
             User user = userService.getUserByCredentials(login, password);
             if (user != null) {
-                UserService.putToSession(req,user);
-                resultPage = userpage;
+                UserUtil.putToSession(req,user);
+                switch (user.getRole_id()) {
+                    case 1:
+
+                        break;
+                    case 2:
+                        resultPage = workerpage;
+                        break;
+                    case 3:
+                        resultPage = userpage;
+                        break;
+                }
             }
         }
         return resultPage;

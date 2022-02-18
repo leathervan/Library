@@ -3,6 +3,7 @@ package dao.subscription;
 import connection.MyConnectionPool;
 import dao.QUERY;
 import dao.receipt.ReceiptDaoImpl;
+import entity.Book;
 import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
@@ -184,5 +185,108 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
             connectionPool.releaseConnection(connection);
         }
         return subscription;
+    }
+
+    @Override
+    public List<Subscription> sortByDebt() {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt=connection.createStatement();
+            ResultSet rs= stmt.executeQuery(QUERY.GET_ALL_SUBSCRIPTION_ORDER_DEBT.query());
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
+    }
+
+    @Override
+    public List<Subscription> sortByDateNew() {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt=connection.createStatement();
+            ResultSet rs= stmt.executeQuery(QUERY.GET_ALL_SUBSCRIPTION_ORDER_START_NEW.query());
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
+    }
+
+    @Override
+    public List<Subscription> sortByDateOld() {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt=connection.createStatement();
+            ResultSet rs= stmt.executeQuery(QUERY.GET_ALL_SUBSCRIPTION_ORDER_START_OLD.query());
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
+    }
+    @Override
+    public List<Subscription> sortByDateEnd() {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt=connection.createStatement();
+            ResultSet rs= stmt.executeQuery(QUERY.GET_ALL_SUBSCRIPTION_ORDER_END.query());
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
+    }
+
+    @Override
+    public List<Subscription> searchByUser(String user_id) {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_SUBSCRIPTION_BY_USER_ID.query());
+            pstmt.setString(1,user_id);
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
+    }
+
+    @Override
+    public List<Subscription> searchByBook(String book_id) {
+        List<Subscription> subs=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.GET_SUBSCRIPTION_BY_BOOK_ID.query());
+            pstmt.setString(1,book_id);
+            ResultSet rs= pstmt.executeQuery();
+            while (rs.next()){
+                subs.add(new Subscription(rs.getInt(1),rs.getTimestamp(2),rs.getTimestamp(3), rs.getInt(4),rs.getInt(5),rs.getInt(6)));
+            }
+
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return subs;
     }
 }

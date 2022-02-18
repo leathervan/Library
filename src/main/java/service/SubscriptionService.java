@@ -19,10 +19,8 @@ public class SubscriptionService {
         return subscriptionDao.create(subscription);
     }
 
-    public boolean deleteSubscription(Subscription subscription){
-        int size=subscriptionDao.getAll().size();
+    public void deleteSubscription(Subscription subscription){
         subscriptionDao.delete(subscription);
-        return subscriptionDao.get(subscription.getId())==null && subscriptionDao.getAll().size()!=size;
     }
 
     public boolean editSubscription(Subscription oldSubscription,Subscription newSubscription){
@@ -45,5 +43,26 @@ public class SubscriptionService {
     }
     public Subscription getSubscriptionByUserAndBookId(String user_id, String book_id) {;
         return subscriptionDao.getSubscriptionByUserAndBookId(user_id, book_id);
+    }
+
+    public List<Subscription> sortByDebt() {
+        return subscriptionDao.sortByDebt();
+    }
+
+    public List<Subscription> sortByDateNew() {
+        return subscriptionDao.sortByDateNew();
+    }
+
+    public List<Subscription> sortByDateOld() {
+        return subscriptionDao.sortByDateOld();
+    }
+    public List<Subscription> sortByDateEnd() {
+        return subscriptionDao.sortByDateEnd();
+    }
+    public List<Subscription> searchByUserId(String user_id){
+        return subscriptionDao.searchByUser(user_id);
+    }
+    public List<Subscription> searchByBookId(String book_id){
+        return subscriptionDao.searchByBook(book_id);
     }
 }

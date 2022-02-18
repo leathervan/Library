@@ -58,15 +58,15 @@
     <%
         BookService bookService=new BookService(BookDaoImpl.getInstance());
         List<Book> bookList = bookService.getAllBook();
-        for (Book film : bookList) {
+        for (Book book : bookList) {
     %>
     <tr>
-        <td><%= film.getId()%></td>
-        <td><%= film.getName()%></td>
-        <td><%= film.getAuthor()%></td>
-        <td><%= film.getEdition()%></td>
-        <td><%= film.getYear_edition()%></td>
-        <td><%= film.getAmount()%></td>
+        <td><%= book.getId()%></td>
+        <td><%= book.getName()%></td>
+        <td><%= book.getAuthor()%></td>
+        <td><%= book.getEdition()%></td>
+        <td><%= book.getYear_edition()%></td>
+        <td><%= book.getAmount()%></td>
     </tr>
     <%
         }

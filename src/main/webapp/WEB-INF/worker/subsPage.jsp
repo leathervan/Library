@@ -45,42 +45,43 @@
     </tr>
     </tbody>
 </table>
-<form action="${pageContext.request.contextPath}/worker">
-    <div class="d-flex">
-        <a href="${pageContext.request.contextPath}/worker?status=EXPECTED" class="btn btn-secondary btn-sm">EXPECTED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=SUBSCRIPTION" class="btn btn-secondary btn-sm">SUBSCRIPTION</a>
-        <a href="${pageContext.request.contextPath}/worker?status=COMPLETED" class="btn btn-secondary btn-sm">COMPLETED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=DENIED" class="btn btn-secondary btn-sm">DENIED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=ALL" class="btn btn-secondary btn-sm">ALL</a>
+<form action="${pageContext.request.contextPath}/subs">
+    <div class="input-group w-25">
+        <input type="text" id="searchuser" name="searchuser" class="form-control" placeholder="Input user id" aria-describedby="basic-addon2">
+        <button class="btn btn-secondary" type="submit">Search</button>
+        <input type="text" id="searchbook" name="searchbook" class="form-control" placeholder="Input book id" aria-describedby="basic-addon2">
+        <button class="btn btn-secondary" type="submit">Search</button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=new">Sort by new</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=old">Sort by old</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=end">Sort by end</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=debt">Sort by debt</a>
+            </ul>
+        </div>
     </div>
 </form>
-<nav aria-label="...">
-    <ul class="pagination pagination-sm">
-        <c:forEach begin="1" end="${countPage}" var="i">
-            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/worker?page=${i}">${i}</a></li>
-        </c:forEach>
-    </ul>
-</nav>
-<table class="table w-75 p-3">
+<table class="table w-50 p-3 table-primary">
     <thead class="table-dark">
     <tr>
-        <th scope="col">Receipt id</th>
+        <th scope="col">Subscription id</th>
+        <th scope="col">Subscription start</th>
+        <th scope="col">Subscription end</th>
+        <th scope="col">Debt</th>
         <th scope="col">User id</th>
         <th scope="col">Book id</th>
-        <th scope="col">Status</th>
-        <th scope="col">Approve order</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${receipts}" var="receipt">
+    <c:forEach items="${subs}" var="sub">
         <tr>
-            <td><c:out value="${receipt.getId()}"/></td>
-            <td><c:out value="${receipt.getUser_id()}"/></td>
-            <td><c:out value="${receipt.getBook_id()}"/></td>
-            <td><c:out value="${receipt.getStatus()}"/></td>
-            <c:if test="${receipt.getStatus() == 1}">
-                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}">Approve order</a></td>
-            </c:if>
+            <td><c:out value="${sub.getId()}"/></td>
+            <td><c:out value="${sub.getStart()}"/></td>
+            <td><c:out value="${sub.getEnd()}"/></td>
+            <td><c:out value="${sub.getDebt()}"/></td>
+            <td><c:out value="${sub.getUser_id()}"/></td>
+            <td><c:out value="${sub.getBook_id()}"/></td>
         </tr>
     </c:forEach>
     </tbody>

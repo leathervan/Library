@@ -2,6 +2,7 @@ package frontcontroller;
 
 import frontcontroller.getcommands.*;
 import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
+import frontcontroller.getcommands.worker.SubsGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
 import frontcontroller.postcommands.ApproveOrderPostCommand;
 import frontcontroller.postcommands.LoginPostCommand;
@@ -22,16 +23,13 @@ public class CommandManager {
         getCommands.put("/signup", new SignupGetCommand());
         getCommands.put("/error", new ErrorGetCommand());
         getCommands.put("/user", new UserPageGetCommand());
-        getCommands.put("/user_sort_by_name", new SortByNameGetCommand());
-        getCommands.put("/user_sort_by_author", new SortByAuthorGetCommand());
-        getCommands.put("/user_sort_by_edition", new SortByEditionGetCommand());
-        getCommands.put("/user_sort_by_year_edition", new SortByYearEditionGetCommand());
         getCommands.put("/orderbook", new OrderGetCommand());
         getCommands.put("/userProfile",new UserProfileGetCommand());
         getCommands.put("/returnbook",new ReturnBookGetCommand());
         getCommands.put("/rejectorder", new RejectOrderGetCommand());
         getCommands.put("/worker",new WorkerPageGetCommand());
         getCommands.put("/approve",new ApproveOrderGetCommand());
+        getCommands.put("/subs",new SubsGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());

@@ -37,7 +37,7 @@ public enum QUERY {
     DELETE_SUBSCRIPTION("delete from subscription where id = ?"),
     GET_ALL_SUBSCRIPTION("select * from subscription"),
     GET_USER_ALL_SUBSCRIPTION("select * from subscription where user_id = ?"),
-    CREATE_SUBSCRIPTION("insert into subscription(start,user_id,book_id) values(sysdate(),?,?)"),
+    CREATE_SUBSCRIPTION("insert into subscription(start,debt,user_id,book_id) values(sysdate(),0,?,?)"),
     SET_SUBSCRIPTION_END("update subscription set end = ? where id = ?"),
     GET_SUBSCRIPTION_BY_USER_ID_AND_BOOK_ID("select * from SUBSCRIPTION where user_id = ? and book_id = ?"),
     EDIT_SUBSCRIPTION("update subscription set start = ?,end = ?,user_id = ?, book_id = ? where id = ?");

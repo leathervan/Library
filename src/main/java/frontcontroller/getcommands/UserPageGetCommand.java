@@ -2,6 +2,8 @@ package frontcontroller.getcommands;
 
 import dao.book.BookDaoImpl;
 import entity.Book;
+import entity.receipt.Receipt;
+import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
 import service.BookService;
 import util.MappingProperties;
@@ -17,6 +19,7 @@ public class UserPageGetCommand implements ServletCommand {
     private BookService bookService;
     private static String userPage;
     private static final Integer countPage = 3;
+    private String sort;
 
     public UserPageGetCommand() {
         bookService=new BookService(BookDaoImpl.getInstance());
@@ -26,7 +29,6 @@ public class UserPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session= req.getSession();
         List<Book> books=bookService.getAllBook();
 
         pagination(req,books);
@@ -53,12 +55,26 @@ public class UserPageGetCommand implements ServletCommand {
         }
     }
     private void pagination(HttpServletRequest req,List<Book> books){
+        if(req.getParameter("sort") == null && sort!=null) {
+            if("name".equals(sort)) books=bookService.sortByName();
+            if("author".equals(sort)) books=bookService.sortByAuthor();
+            if("edition".equals(sort)) books=bookService.sortByEdition();
+            if("year".equals(sort)) books=bookService.sortByYearEdition();
+        }
+        if(req.getParameter("sort") != null) {
+            sort = req.getParameter("sort");
+            if("name".equals(sort)) books=bookService.sortByName();
+            if("author".equals(sort)) books=bookService.sortByAuthor();
+            if("edition".equals(sort)) books=bookService.sortByEdition();
+            if("year".equals(sort)) books=bookService.sortByYearEdition();
+        }
+
         req.setAttribute("countPage",(books.size()/countPage));//pagination view
         req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start
 
         if(req.getParameter("page") != null){
             int number = Integer.valueOf(req.getParameter("page"));
-            books=bookService.getAllBook().stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
+            books = books.stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
             req.setAttribute("books",books);
         }
     }

@@ -29,8 +29,6 @@ public class WorkerPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-        if(req.getParameter("datetime")!=null) System.out.println(req.getParameter("datetime"));
-        HttpSession session= req.getSession();
         List<Receipt> receipts = receiptService.getAllReceipt();
         pagination(req,receipts);
         return workerPage;

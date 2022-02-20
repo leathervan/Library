@@ -62,7 +62,7 @@
         </div>
     </div>
 </form>
-<table class="table w-50 p-3 table-primary">
+<table class="table w-75 p-3 table-primary">
     <thead class="table-dark">
     <tr>
         <th scope="col">Subscription id</th>
@@ -70,7 +70,11 @@
         <th scope="col">Subscription end</th>
         <th scope="col">Debt</th>
         <th scope="col">User id</th>
+        <th scope="col">User name</th>
+        <th scope="col">User surname</th>
         <th scope="col">Book id</th>
+        <th scope="col">Book name</th>
+        <th scope="col">Book author</th>
     </tr>
     </thead>
     <tbody>
@@ -80,8 +84,12 @@
             <td><c:out value="${sub.getStart()}"/></td>
             <td><c:out value="${sub.getEnd()}"/></td>
             <td><c:out value="${sub.getDebt()}"/></td>
-            <td><c:out value="${sub.getUser_id()}"/></td>
-            <td><c:out value="${sub.getBook_id()}"/></td>
+            <td><c:out value="${sub.getUser().getId()}"/></td>
+            <td><c:out value="${sub.getUser().getName()}"/></td>
+            <td><c:out value="${sub.getUser().getSurname()}"/></td>
+            <td><c:out value="${sub.getBook().getId()}"/></td>
+            <td><c:out value="${sub.getBook().getName()}"/></td>
+            <td><c:out value="${sub.getBook().getAuthor()}"/></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -2,6 +2,7 @@ package frontcontroller.getcommands.worker;
 
 import dao.receipt.ReceiptDaoImpl;
 import dao.subscription.SubscriptionDaoImpl;
+import dto.SubscriptionDto;
 import entity.Book;
 import entity.Subscription;
 import entity.receipt.Receipt;
@@ -32,36 +33,50 @@ public class SubsGetCommand implements ServletCommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         List<Subscription> subs = subscriptionService.getAllSubscription();
-        pagination(req,subs);
-        searchSubs(req,subs);
+        List<SubscriptionDto> subscriptionDtos=new ArrayList<>();
+        sortSubs(req,subs,subscriptionDtos);
+        searchSubs(req,subs,subscriptionDtos);
         return subsPage;
     }
-    private void pagination(HttpServletRequest req,List<Subscription> subs){
-        if(req.getParameter("sort") == null && sort!=null) {
-            if("new".equals(sort)) subs=subscriptionService.sortByDateNew();
-            if("old".equals(sort)) subs=subscriptionService.sortByDateOld();
-            if("end".equals(sort)) subs=subscriptionService.sortByDateEnd();
-            if("debt".equals(sort)) subs=subscriptionService.sortByDebt();
-        }
+
+    private void sortSubs(HttpServletRequest req,List<Subscription> subs,List<SubscriptionDto> subscriptionDtos){
+        if(req.getParameter("sort") == null && sort!=null) checkSortParameter(subs,sort);
         if(req.getParameter("sort") != null) {
             sort = req.getParameter("sort");
-            if("new".equals(sort)) subs=subscriptionService.sortByDateNew();
-            if("old".equals(sort)) subs=subscriptionService.sortByDateOld();
-            if("end".equals(sort)) subs=subscriptionService.sortByDateEnd();
-            if("debt".equals(sort)) subs=subscriptionService.sortByDebt();
+            subs = checkSortParameter(subs,sort);
         }
-        req.setAttribute("subs",subs);
+        convertToSubscriptionDto(subs,subscriptionDtos);
+        req.setAttribute("subs",subscriptionDtos);
     }
-    private void searchSubs(HttpServletRequest req,List<Subscription> subs){
+
+    private void searchSubs(HttpServletRequest req,List<Subscription> subs,List<SubscriptionDto> subscriptionDtos){
         String search = req.getParameter("searchuser");
         if(search != null && search.length()>0) {
             subs = subscriptionService.searchByUserId(search);
-            req.setAttribute("subs",subs);
+            subscriptionDtos.clear();
+            convertToSubscriptionDto(subs,subscriptionDtos);
+            req.setAttribute("subs",subscriptionDtos);
         }
         search = req.getParameter("searchbook");
         if(search != null && search.length()>0) {
             subs = subscriptionService.searchByBookId(search);
-            req.setAttribute("subs",subs);
+            subscriptionDtos.clear();
+            convertToSubscriptionDto(subs,subscriptionDtos);
+            req.setAttribute("subs",subscriptionDtos);;
         }
+    }
+
+    private void convertToSubscriptionDto(List<Subscription> subscriptions, List<SubscriptionDto> subscriptionDtos){
+        for (Subscription subscription: subscriptions){
+            subscriptionDtos.add(new SubscriptionDto(subscription));
+        }
+    }
+
+    private List<Subscription> checkSortParameter(List<Subscription> subs, String sort){
+        if("new".equals(sort)) subs=subscriptionService.sortByDateNew();
+        if("old".equals(sort)) subs=subscriptionService.sortByDateOld();
+        if("end".equals(sort)) subs=subscriptionService.sortByDateEnd();
+        if("debt".equals(sort)) subs=subscriptionService.sortByDebt();
+        return subs;
     }
 }

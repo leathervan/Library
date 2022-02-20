@@ -3,6 +3,8 @@ package frontcontroller.getcommands;
 import dao.receipt.ReceiptDaoImpl;
 import dao.subscription.SubscriptionDaoImpl;
 import dao.user.UserDaoImpl;
+import dto.ReceiptDto;
+import dto.SubscriptionDto;
 import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
@@ -15,6 +17,7 @@ import util.MappingProperties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfileGetCommand implements ServletCommand{
@@ -37,8 +40,22 @@ public class UserProfileGetCommand implements ServletCommand{
         User user=userService.getUserById(Integer.valueOf(session.getAttribute("id").toString()));
         List<Subscription> subs=subscriptionService.getUserSubscription(user);
         List<Receipt> receipts=receiptService.getReceiptsByUserId(user);
-        req.setAttribute("subs",subs);
-        req.setAttribute("receipts",receipts);
+        List<SubscriptionDto> subscriptionDtos=new ArrayList<>();
+        List<ReceiptDto> receiptDtos=new ArrayList<>();
+        convertToSubscriptionDto(subs,subscriptionDtos);
+        convertToReceiptDto(receipts,receiptDtos);
+        req.setAttribute("subs",subscriptionDtos);
+        req.setAttribute("receipts",receiptDtos);
         return userProfile;
+    }
+    private void convertToReceiptDto(List<Receipt> receipts, List<ReceiptDto> receiptDtos){
+        for (Receipt receipt: receipts){
+            receiptDtos.add(new ReceiptDto(receipt));
+        }
+    }
+    private void convertToSubscriptionDto(List<Subscription> subscriptions, List<SubscriptionDto> subscriptionDtos){
+        for (Subscription subscription: subscriptions){
+            subscriptionDtos.add(new SubscriptionDto(subscription));
+        }
     }
 }

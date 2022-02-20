@@ -54,6 +54,7 @@
       <th scope="col">Subscription end</th>
       <th scope="col">Debt</th>
       <th scope="col">Book id</th>
+      <th scope="col">Book name</th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -64,7 +65,8 @@
         <td><c:out value="${sub.getStart()}"/></td>
         <td><c:out value="${sub.getEnd()}"/></td>
         <td><c:out value="${sub.getDebt()}"/></td>
-        <td><c:out value="${sub.getBook_id()}"/></td>
+        <td><c:out value="${sub.getBook().getId()}"/></td>
+        <td><c:out value="${sub.getBook().getName()}"/></td>
         <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/returnbook?subID=${sub.getId()}">Return book</a></td>
       </tr>
     </c:forEach>
@@ -75,6 +77,8 @@
     <tr>
       <th scope="col">Receipt id</th>
       <th scope="col">Book id</th>
+      <th scope="col">Book name</th>
+      <th scope="col">Book author</th>
       <th scope="col">Status</th>
       <th scope="col"></th>
     </tr>
@@ -83,7 +87,9 @@
     <c:forEach items="${receipts}" var="receipt">
       <tr>
         <td><c:out value="${receipt.getId()}"/></td>
-        <td><c:out value="${receipt.getBook_id()}"/></td>
+        <td><c:out value="${receipt.getBook().getId()}"/></td>
+        <td><c:out value="${receipt.getBook().getName()}"/></td>
+        <td><c:out value="${receipt.getBook().getAuthor()}"/></td>
         <td><c:out value="${receipt.getStatus()}"/></td>
         <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/rejectorder?receiptID=${receipt.getId()}">Reject order</a></td>
       </tr>

@@ -66,7 +66,11 @@
         <tr>
             <th scope="col">Receipt id</th>
             <th scope="col">User id</th>
+            <th scope="col">User name</th>
+            <th scope="col">User surname</th>
             <th scope="col">Book id</th>
+            <th scope="col">Book name</th>
+            <th scope="col">Book surname</th>
             <th scope="col">Status</th>
             <th scope="col">Approve order</th>
         </tr>
@@ -75,11 +79,15 @@
         <c:forEach items="${receipts}" var="receipt">
         <tr>
             <td><c:out value="${receipt.getId()}"/></td>
-            <td><c:out value="${receipt.getUser_id()}"/></td>
-            <td><c:out value="${receipt.getBook_id()}"/></td>
+            <td><c:out value="${receipt.getUser().getId()}"/></td>
+            <td><c:out value="${receipt.getUser().getName()}"/></td>
+            <td><c:out value="${receipt.getUser().getSurname()}"/></td>
+            <td><c:out value="${receipt.getBook().getId()}"/></td>
+            <td><c:out value="${receipt.getBook().getName()}"/></td>
+            <td><c:out value="${receipt.getBook().getAuthor()}"/></td>
             <td><c:out value="${receipt.getStatus()}"/></td>
-            <c:if test="${receipt.getStatus() == 1}">
-                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}">Approve order</a></td>
+            <c:if test="${receipt.getStatus() == 'EXPECTED'}">
+                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}">Approve</a></td>
             </c:if>
         </tr>
         </c:forEach>

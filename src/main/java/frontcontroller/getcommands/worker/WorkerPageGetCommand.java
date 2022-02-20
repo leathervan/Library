@@ -1,7 +1,10 @@
 package frontcontroller.getcommands.worker;
 
 import dao.receipt.ReceiptDaoImpl;
+import dto.ReceiptDto;
+import dto.SubscriptionDto;
 import entity.Book;
+import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
@@ -43,12 +46,26 @@ public class WorkerPageGetCommand implements ServletCommand {
             if("ALL".equals(status)) receipts = receiptService.getAllReceipt();
             else receipts = receiptService.getAllReceipt(String.valueOf(ReceiptStatus.valueOf(status).ordinal()));
         }
-        req.setAttribute("countPage",((receipts.size()/countPage)+1));//pagination view
-        req.setAttribute("receipts",receipts.stream().limit(countPage).collect(Collectors.toList()));//start
+        List<ReceiptDto> receiptDtos=new ArrayList<>();
+        convertToReceiptDto(receipts,receiptDtos);
+        setPage(req,receiptDtos);
+    }
+
+    private void convertToReceiptDto(List<Receipt> receipts, List<ReceiptDto> receiptDtos){
+        for (Receipt receipt: receipts){
+            receiptDtos.add(new ReceiptDto(receipt));
+        }
+    }
+
+    private void setPage(HttpServletRequest req,List<ReceiptDto> receiptDtos){
+        req.setAttribute("countPage",((receiptDtos.size()/countPage)+1));
+
         if(req.getParameter("page") != null){
             int number = Integer.valueOf(req.getParameter("page"));
-            List<Receipt> paginationReceipts=receipts.stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
-            req.setAttribute("receipts",paginationReceipts);
+            receiptDtos = receiptDtos.stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
         }
+        else receiptDtos = receiptDtos.stream().limit(countPage).collect(Collectors.toList());
+
+        req.setAttribute("receipts",receiptDtos);
     }
 }

@@ -50,7 +50,7 @@
     <div class="input-group w-25">
         <input type="text" id="search" name="search" class="form-control" placeholder="Input name or author's name" aria-describedby="basic-addon2">
         <button class="btn btn-secondary" type="submit">Search</button>
-        <a href="${pageContext.request.contextPath}/adminAdd?" class="btn btn-secondary">Add book</a>
+        <a href="${pageContext.request.contextPath}/addbook" class="btn btn-secondary">Add book</a>
     </div>
 </form>
 <nav aria-label="...">

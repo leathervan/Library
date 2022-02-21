@@ -1,16 +1,14 @@
 package frontcontroller;
 
 import frontcontroller.getcommands.*;
+import frontcontroller.getcommands.admin.AddBookGetCommand;
 import frontcontroller.getcommands.admin.AdminPageGetCommand;
 import frontcontroller.getcommands.admin.DeleteBookGetCommand;
 import frontcontroller.getcommands.admin.EditBookGetCommand;
 import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
 import frontcontroller.getcommands.worker.SubsGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
-import frontcontroller.postcommands.ApproveOrderPostCommand;
-import frontcontroller.postcommands.EditBookPostCommand;
-import frontcontroller.postcommands.LoginPostCommand;
-import frontcontroller.postcommands.SignupPostCommand;
+import frontcontroller.postcommands.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -37,11 +35,13 @@ public class CommandManager {
         getCommands.put("/admin", new AdminPageGetCommand());
         getCommands.put("/deletebook", new DeleteBookGetCommand());
         getCommands.put("/editbook",new EditBookGetCommand());
+        getCommands.put("/addbook",new AddBookGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
         postCommands.put("/approve", new ApproveOrderPostCommand());
         postCommands.put("/editbook",new EditBookPostCommand());
+        postCommands.put("/addbook",new AddBookPostCommand());
     }
 
     public ServletCommand getGetCommand(HttpServletRequest req) {

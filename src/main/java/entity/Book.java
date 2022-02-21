@@ -25,6 +25,8 @@ public class Book {
         this.year_edition = year_edition;
         this.amount = amount;
     }
+    public Book() {
+    }
 
     @Override
     public boolean equals(Object o) {

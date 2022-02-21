@@ -13,7 +13,7 @@ public enum QUERY {
     GET_BOOK("select * from book where id = ?"),
     GET_ALL_BOOKS("select * from book"),
     DELETE_BOOK("delete from book where id = ?"),
-    EDIT_BOOK("update book set name = ?,author = ?,edtion = ?, year_edition = ?,amount = ? where id = ?"),
+    EDIT_BOOK("update book set name = ?,author = ?,edition = ?, year_edition = ?,amount = ? where id = ?"),
     INCREASE_AMOUNT_OF_BOOK("update book set amount = amount + 1 where id = ?"),
     DECREASE_AMOUNT_OF_BOOK("update book set amount = amount - 1 where id = ?"),
     SEARCH_BOOK_BY_AUTHOR("select * from book where author=?"),

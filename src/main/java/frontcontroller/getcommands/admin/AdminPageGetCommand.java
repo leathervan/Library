@@ -1,31 +1,27 @@
-package frontcontroller.getcommands;
+package frontcontroller.getcommands.admin;
 
 import dao.book.BookDaoImpl;
 import entity.Book;
-import entity.Subscription;
-import entity.receipt.Receipt;
-import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
 import service.BookService;
 import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserPageGetCommand implements ServletCommand {
+public class AdminPageGetCommand implements ServletCommand {
     private BookService bookService;
-    private static String userPage;
-    private static final Integer countPage = 3;
+    private static String adminPage;
+    private static final Integer countPage = 10;
     private String sort;
 
-    public UserPageGetCommand() {
+    public AdminPageGetCommand() {
         bookService=new BookService(BookDaoImpl.getInstance());
         MappingProperties properties = MappingProperties.getInstance();
-        userPage = properties.getProperty("userPage");
+        adminPage = properties.getProperty("adminPage");
     }
 
     @Override
@@ -34,7 +30,7 @@ public class UserPageGetCommand implements ServletCommand {
 
         pagination(req,books);
         searchBooks(req,books);
-        return userPage;
+        return adminPage;
     }
 
     private void searchBooks(HttpServletRequest req,List<Book> books){
@@ -56,12 +52,6 @@ public class UserPageGetCommand implements ServletCommand {
         }
     }
     private void pagination(HttpServletRequest req,List<Book> books){
-        if(req.getParameter("sort") == null && sort!=null) books = checkSortParameter(books,sort);
-        if(req.getParameter("sort") != null) {
-            sort = req.getParameter("sort");
-            books = checkSortParameter(books,sort);
-        }
-
         req.setAttribute("countPage",(books.size()/countPage));//pagination view
         req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start
 
@@ -70,22 +60,5 @@ public class UserPageGetCommand implements ServletCommand {
             books = books.stream().skip((number-1)*countPage).limit(countPage).collect(Collectors.toList());
             req.setAttribute("books",books);
         }
-    }
-    private List<Book> checkSortParameter(List<Book> books, String sort){
-        switch (sort) {
-            case "name":
-                books=bookService.sortByName();
-                break;
-            case "author":
-                books=bookService.sortByAuthor();
-                break;
-            case "edition":
-                books=bookService.sortByEdition();
-                break;
-            case "year":
-                books=bookService.sortByYearEdition();
-                break;
-        }
-        return books;
     }
 }

@@ -1,10 +1,14 @@
 package frontcontroller;
 
 import frontcontroller.getcommands.*;
+import frontcontroller.getcommands.admin.AdminPageGetCommand;
+import frontcontroller.getcommands.admin.DeleteBookGetCommand;
+import frontcontroller.getcommands.admin.EditBookGetCommand;
 import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
 import frontcontroller.getcommands.worker.SubsGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
 import frontcontroller.postcommands.ApproveOrderPostCommand;
+import frontcontroller.postcommands.EditBookPostCommand;
 import frontcontroller.postcommands.LoginPostCommand;
 import frontcontroller.postcommands.SignupPostCommand;
 
@@ -30,10 +34,14 @@ public class CommandManager {
         getCommands.put("/worker",new WorkerPageGetCommand());
         getCommands.put("/approve",new ApproveOrderGetCommand());
         getCommands.put("/subs",new SubsGetCommand());
+        getCommands.put("/admin", new AdminPageGetCommand());
+        getCommands.put("/deletebook", new DeleteBookGetCommand());
+        getCommands.put("/editbook",new EditBookGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
         postCommands.put("/approve", new ApproveOrderPostCommand());
+        postCommands.put("/editbook",new EditBookPostCommand());
     }
 
     public ServletCommand getGetCommand(HttpServletRequest req) {

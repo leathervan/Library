@@ -73,10 +73,20 @@ public class SubsGetCommand implements ServletCommand {
     }
 
     private List<Subscription> checkSortParameter(List<Subscription> subs, String sort){
-        if("new".equals(sort)) subs=subscriptionService.sortByDateNew();
-        if("old".equals(sort)) subs=subscriptionService.sortByDateOld();
-        if("end".equals(sort)) subs=subscriptionService.sortByDateEnd();
-        if("debt".equals(sort)) subs=subscriptionService.sortByDebt();
+        switch (sort) {
+            case "new":
+                subs=subscriptionService.sortByDateNew();
+                break;
+            case "old":
+                subs=subscriptionService.sortByDateOld();
+                break;
+            case "end":
+                subs=subscriptionService.sortByDateEnd();
+                break;
+            case "debt":
+                subs=subscriptionService.sortByDebt();
+                break;
+        }
         return subs;
     }
 }

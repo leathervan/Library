@@ -17,6 +17,7 @@ public class LoginPostCommand implements ServletCommand {
     private static String errorpage;
     private static String userpage;
     private static String workerpage;
+    private static String adminpage;
 
     public LoginPostCommand() {
         userService = new UserService(UserDaoImpl.getInstance());
@@ -27,6 +28,7 @@ public class LoginPostCommand implements ServletCommand {
         errorpage = properties.getProperty("errorPagePost");
         userpage=properties.getProperty("userPagePost");
         workerpage = properties.getProperty("workerPagePost");
+        adminpage = properties.getProperty("adminPagePost");
     }
 
     @Override
@@ -40,7 +42,7 @@ public class LoginPostCommand implements ServletCommand {
                 UserUtil.putToSession(req,user);
                 switch (user.getRole_id()) {
                     case 1:
-
+                        resultPage = adminpage;
                         break;
                     case 2:
                         resultPage = workerpage;

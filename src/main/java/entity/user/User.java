@@ -8,6 +8,8 @@ public class User {
     private String surname;
     private Integer role_id;
 
+    public User() {}
+
     public User(Integer id, String email, String password, String name, String surname, Integer role_id) {
         this.id = id;
         this.email = email;

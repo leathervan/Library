@@ -8,6 +8,7 @@ import entity.receipt.ReceiptStatus;
 import entity.user.User;
 import entity.user.UserRole;
 import service.BookService;
+import service.ReceiptService;
 import service.UserService;
 
 
@@ -21,6 +22,5 @@ public class Main {
 
         User user=new User(6,"qwerty","qwerty","Bogdan","Oskin",3);
         Book book=new Book(1,"20book1","author1","edition1",2010,2);
-        System.out.println(ReceiptStatus.valueOf("DENIED"));
     }
 }

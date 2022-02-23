@@ -52,7 +52,8 @@ public class AdminPageGetCommand implements ServletCommand {
         }
     }
     private void pagination(HttpServletRequest req,List<Book> books){
-        req.setAttribute("countPage",(books.size()/countPage));//pagination view
+        if(books.size()%countPage==0) req.setAttribute("countPage",(books.size()/countPage));
+        else req.setAttribute("countPage",(books.size()/countPage) + 1);//pagination view
         req.setAttribute("books",books.stream().limit(countPage).collect(Collectors.toList()));//start
 
         if(req.getParameter("page") != null){

@@ -17,6 +17,9 @@ public class UserService {
     public User signUp(User user) {
         return userDao.create(user);
     }
+    public void delete(User user) {
+        userDao.delete(user);
+    }
 
     public User getUserByCredentials(String login, String password) {;
         return userDao.getUserByLoginAndPassword(login, password);
@@ -36,5 +39,13 @@ public class UserService {
 
     public boolean checkLogin(String login){
         return userDao.checkLogin(login)!=null;
+    }
+
+    public List<User> getAllWorkers() {
+        return userDao.getAllWorkers();
+    }
+
+    public List<User> getAllCustomers() {
+        return userDao.getAllCustomers();
     }
 }

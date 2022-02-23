@@ -3,6 +3,8 @@ package dao.user;
 import dao.DAO;
 import entity.user.User;
 
+import java.util.List;
+
 public interface UserDao extends DAO<User> {
     User getUserByLoginAndPassword(String login, String password);
 
@@ -10,4 +12,7 @@ public interface UserDao extends DAO<User> {
 
     User checkLogin(String login);
 
+    List<User> getAllCustomers();
+
+    List<User> getAllWorkers();
 }

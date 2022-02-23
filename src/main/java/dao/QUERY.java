@@ -3,6 +3,8 @@ package dao;
 public enum QUERY {
     CREATE_USER("insert into user value(default,?,?,?,?,?)"),
     GET_USER("select * from user where id = ?"),
+    GET_ALL_WORKERS("select * from user where role_id = 2"),
+    GET_ALL_CUSTOMERS("select * from user where role_id = 3"),
     GET_USER_BY_LOGIN("select * from user where email = ?"),
     GET_USER_BY_LOGIN_AND_PASSWORD("select * from user where email = ? and password = ?"),
     GET_ALL_USERS("select * from user"),

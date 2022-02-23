@@ -174,4 +174,42 @@ public class UserDaoImpl implements UserDao{
     public boolean changeStatus(long userId, boolean status) {
         return false;
     }
+
+    @Override
+    public List<User> getAllCustomers() {
+        List<User> users=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs=stmt.executeQuery(QUERY.GET_ALL_CUSTOMERS.query());
+            while (rs.next()){
+                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
+            }
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return users;
+    }
+
+    @Override
+    public List<User> getAllWorkers() {
+        List<User> users=new ArrayList<>();
+        Connection connection= connectionPool.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs=stmt.executeQuery(QUERY.GET_ALL_WORKERS.query());
+            while (rs.next()){
+                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
+            }
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return users;
+    }
 }

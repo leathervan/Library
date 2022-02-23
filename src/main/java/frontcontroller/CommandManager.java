@@ -1,10 +1,7 @@
 package frontcontroller;
 
 import frontcontroller.getcommands.*;
-import frontcontroller.getcommands.admin.AddBookGetCommand;
-import frontcontroller.getcommands.admin.AdminPageGetCommand;
-import frontcontroller.getcommands.admin.DeleteBookGetCommand;
-import frontcontroller.getcommands.admin.EditBookGetCommand;
+import frontcontroller.getcommands.admin.*;
 import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
 import frontcontroller.getcommands.worker.SubsGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
@@ -36,12 +33,17 @@ public class CommandManager {
         getCommands.put("/deletebook", new DeleteBookGetCommand());
         getCommands.put("/editbook",new EditBookGetCommand());
         getCommands.put("/addbook",new AddBookGetCommand());
+        getCommands.put("/adminWorkers",new WorkersGetCommand());
+        getCommands.put("/adminCustomers", new UsersGetCommand());
+        getCommands.put("/deleteworker",new DeleteWorkerGetCommand());
+        getCommands.put("/addworker",new AddWorkerGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
         postCommands.put("/approve", new ApproveOrderPostCommand());
         postCommands.put("/editbook",new EditBookPostCommand());
         postCommands.put("/addbook",new AddBookPostCommand());
+        postCommands.put("/addworker",new AddWorkerPostCommand());
     }
 
     public ServletCommand getGetCommand(HttpServletRequest req) {

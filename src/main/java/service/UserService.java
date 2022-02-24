@@ -33,9 +33,7 @@ public class UserService {
         return userDao.get(userId);
     }
 
-    public boolean changeUserStatus(long userId, boolean status) {
-        return userDao.changeStatus(userId, status);
-    }
+    public void changeUserStatus(long userId, boolean status) {userDao.changeStatus(userId, status);}
 
     public boolean checkLogin(String login){
         return userDao.checkLogin(login)!=null;

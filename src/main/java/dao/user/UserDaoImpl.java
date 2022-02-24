@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao{
             pstmt.setString(1,String.valueOf(id));
             ResultSet rs= pstmt.executeQuery();
             while (rs.next()){
-                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao{
             Statement stmt = connection.createStatement();
             ResultSet rs=stmt.executeQuery(QUERY.GET_ALL_USERS.query());
             while (rs.next()){
-                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
+                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7)));
             }
         }catch (SQLException exception){
             exception.printStackTrace();
@@ -139,7 +139,7 @@ public class UserDaoImpl implements UserDao{
             pstmt.setString(2,password);
             ResultSet rs= pstmt.executeQuery();
             while (rs.next()){
-                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -159,7 +159,7 @@ public class UserDaoImpl implements UserDao{
             pstmt.setString(1,login);
             ResultSet rs= pstmt.executeQuery();
             while (rs.next()){
-                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+                user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -171,8 +171,21 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public boolean changeStatus(long userId, boolean status) {
-        return false;
+    public void changeStatus(long userId, boolean status) {
+        System.out.println(userId);
+        System.out.println(status);
+        Connection connection= connectionPool.getConnection();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(QUERY.BLOCK_USER.query());
+            if(status) pstmt = connection.prepareStatement(QUERY.UNBLOCK_USER.query());
+            pstmt.setString(1,String.valueOf(userId));
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            connectionPool.releaseConnection(connection);
+        }
     }
 
     @Override
@@ -183,7 +196,7 @@ public class UserDaoImpl implements UserDao{
             Statement stmt = connection.createStatement();
             ResultSet rs=stmt.executeQuery(QUERY.GET_ALL_CUSTOMERS.query());
             while (rs.next()){
-                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
+                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7)));
             }
         }catch (SQLException exception){
             exception.printStackTrace();
@@ -202,7 +215,7 @@ public class UserDaoImpl implements UserDao{
             Statement stmt = connection.createStatement();
             ResultSet rs=stmt.executeQuery(QUERY.GET_ALL_WORKERS.query());
             while (rs.next()){
-                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6)));
+                users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getBoolean(6),rs.getInt(7)));
             }
         }catch (SQLException exception){
             exception.printStackTrace();

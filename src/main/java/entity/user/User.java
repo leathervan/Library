@@ -6,6 +6,7 @@ public class User {
     private String password;
     private String name;
     private String surname;
+    private Boolean blocked;
     private Integer role_id;
 
     public User() {}
@@ -19,13 +20,16 @@ public class User {
         this.role_id = role_id;
     }
 
-    public User(String email, String password, String name, String surname, Integer role_id) {
+    public User(Integer id, String email, String password, String name, String surname, Boolean blocked, Integer role_id) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.blocked = blocked;
         this.role_id = role_id;
     }
+
     @Override
     public String toString() {
         return "User{" +
@@ -34,6 +38,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", blocked=" + blocked +
                 ", role_id=" + role_id +
                 '}';
     }
@@ -76,6 +81,14 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 
     public Integer getRole_id() {

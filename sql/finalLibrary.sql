@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `library`.`user` (
   `password` VARCHAR(32) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `surname` VARCHAR(45) NOT NULL,
+  `blocked` TINYINT NOT NULL DEFAULT 0,
   `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_role_idx` (`role_id` ASC) VISIBLE,
@@ -71,9 +72,9 @@ CREATE TABLE IF NOT EXISTS `library`.`user` (
     ON DELETE cascade
     ON UPDATE cascade);
     
-insert into user value (default,'papijk@gmail.com','password','Danilo','Papizhuk',1);
-insert into user value (default,'karasax@gmail.com','password1','Alexander','Karas',2);
-insert into user value (default,'darkmisha2012@gmail.com','darkmisha2012','Mykhailo','Gienko',3);
+insert into user value (default,'papijk@gmail.com','password','Danilo','Papizhuk',default,1);
+insert into user value (default,'karasax@gmail.com','password1','Alexander','Karas',default,2);
+insert into user value (default,'darkmisha2012@gmail.com','darkmisha2012','Mykhailo','Gienko',default,3);
 
 -- -----------------------------------------------------
 -- Table `library`.`receipt_status`

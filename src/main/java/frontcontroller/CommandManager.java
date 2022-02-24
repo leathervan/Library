@@ -37,6 +37,7 @@ public class CommandManager {
         getCommands.put("/adminCustomers", new UsersGetCommand());
         getCommands.put("/deleteworker",new DeleteWorkerGetCommand());
         getCommands.put("/addworker",new AddWorkerGetCommand());
+        getCommands.put("/blockuser", new BlockUnblockUSerGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());

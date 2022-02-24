@@ -54,6 +54,8 @@
         <th scope="col">Email</th>
         <th scope="col">Name</th>
         <th scope="col">Surname</th>
+        <th scope="col">Blocked</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -63,6 +65,13 @@
             <td><c:out value="${user.getEmail()}"/></td>
             <td><c:out value="${user.getName()}"/></td>
             <td><c:out value="${user.getSurname()}"/></td>
+            <td><c:out value="${user.getBlocked()}"/></td>
+            <c:if test="${user.getBlocked() == true}">
+                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/blockuser?userID=${user.getId()}">Unblock</a></td>
+            </c:if>
+            <c:if test="${user.getBlocked() == false}">
+                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/blockuser?userID=${user.getId()}">Block</a></td>
+            </c:if>
         </tr>
     </c:forEach>
     </tbody>

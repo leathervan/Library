@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserDao extends DAO<User> {
     User getUserByLoginAndPassword(String login, String password);
 
-    boolean changeStatus(long userId, boolean status);
+    void changeStatus(long userId, boolean status);
 
     User checkLogin(String login);
 

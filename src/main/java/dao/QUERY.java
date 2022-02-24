@@ -1,7 +1,9 @@
 package dao;
 
 public enum QUERY {
-    CREATE_USER("insert into user value(default,?,?,?,?,?)"),
+    CREATE_USER("insert into user value(default,?,?,?,?,default,?)"),
+    BLOCK_USER("update user set blocked = 1 where id = ?"),
+    UNBLOCK_USER("update user set blocked = 0 where id = ?"),
     GET_USER("select * from user where id = ?"),
     GET_ALL_WORKERS("select * from user where role_id = 2"),
     GET_ALL_CUSTOMERS("select * from user where role_id = 3"),

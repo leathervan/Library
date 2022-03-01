@@ -2,6 +2,7 @@ package frontcontroller.postcommands;
 
 import dao.user.UserDaoImpl;
 import entity.user.User;
+import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import service.UserService;
 import util.MappingProperties;
@@ -38,7 +39,7 @@ public class LoginPostCommand implements ServletCommand {
         String password = req.getParameter("password");
         if (login != null && password != null && login.length() > 0 && password.length() > 0) {
             User user = userService.getUserByCredentials(login, password);
-            if (user != null) {
+            if (user != null && !user.getBlocked()) {
                 UserUtil.putToSession(req,user);
                 switch (user.getRole_id()) {
                     case 1:

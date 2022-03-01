@@ -14,6 +14,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="img/navbar_logo.jpg">
     <div class="container-fluid">
         <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2">Library</span> </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

@@ -11,67 +11,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/"><span class="mb-0 h2">Library</span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <form class="d-flex">
-            <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Login</a>
-                <a href="${pageContext.request.contextPath}/signup" class="btn btn-secondary">Sig up</a>
+<section class="vh-100" style="background-color: #bdbebd;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <img src="img/logo.jpg">
+                    <div class="card-body p-5 text-center">
+                        <p class="text-center fs-1">Welcome to the library</p>
+                        <p class="text-center">Please, login or sign up to continue</p>
+                        <a href="${pageContext.request.contextPath}/login" class="btn btn-lg btn-block btn-primary" type="submit"> Login</a>
+                        <a href="${pageContext.request.contextPath}/signup" class="btn btn-lg btn-block btn-secondary" type="submit"> Sign Up</a>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
-</nav>
-<form>
-    <div class="input-group w-25">
-        <input type="text" class="form-control" placeholder="Input name or author's name" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">Search</a>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Sort by name</a></li>
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Sort by author</a></li>
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Sort by edition</a></li>
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Sort by year edition</a></li>
-            </ul>
         </div>
     </div>
-</form>
-<table class="table table-bordered">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Author</th>
-        <th scope="col">Edition</th>
-        <th scope="col">Year Edition</th>
-        <th scope="col">Amount</th>
-    </tr>
-    </thead>
-
-
-    <%
-        BookService bookService=new BookService(BookDaoImpl.getInstance());
-        List<Book> bookList = bookService.getAllBook();
-        for (Book book : bookList) {
-    %>
-    <tr>
-        <td><%= book.getId()%></td>
-        <td><%= book.getName()%></td>
-        <td><%= book.getAuthor()%></td>
-        <td><%= book.getEdition()%></td>
-        <td><%= book.getYear_edition()%></td>
-        <td><%= book.getAmount()%></td>
-    </tr>
-    <%
-        }
-    %>
-
-</table>
+</section>
 </body>
 </html>

@@ -39,31 +39,5 @@
         </div>
     </div>
 </section>
-<!------ Include the above in your HEAD tag ---------->
-<%--<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Login Form -->
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
-        <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
-    </div>
-</div>--%>
-<%--
-
-<div class="page">
-    <main>
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <div class="loader"></div>
-            <input type="text" name="login" required placeholder="Login"><br>
-            <input type="password" name="password" required placeholder="Password" minlength="8"><br>
-            <button type="submit">Sign in</button>
-        </form>
-        <
-    </main>
-</div>--%>
-
 </body>
 </html>

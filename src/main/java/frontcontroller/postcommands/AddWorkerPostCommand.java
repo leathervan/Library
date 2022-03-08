@@ -8,6 +8,7 @@ import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import service.BookService;
 import service.UserService;
+import util.EncryptionUtil;
 import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,6 @@ public class AddWorkerPostCommand implements ServletCommand {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String resultPage = adminPage;
-        Book newbook = new Book();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
@@ -35,7 +35,7 @@ public class AddWorkerPostCommand implements ServletCommand {
         User user=new User();
         user.setRole_id(UserRole.WORKER.ordinal());
         if(email != null && email.length()>0) user.setEmail(email);
-        if(password != null && password.length()>0) user.setPassword(password);
+        if(password != null && password.length()>0) user.setPassword(EncryptionUtil.md5(password));
         if(name != null && name.length()>0) user.setName(name);
         if(surname != null && surname.length()>0) user.setSurname(surname);
         userService.signUp(user);

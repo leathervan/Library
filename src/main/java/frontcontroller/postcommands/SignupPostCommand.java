@@ -5,6 +5,7 @@ import entity.user.User;
 import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import service.UserService;
+import util.EncryptionUtil;
 import util.MappingProperties;
 import util.UserUtil;
 
@@ -38,7 +39,7 @@ public class SignupPostCommand implements ServletCommand {
             if(login.length() > 0 && password.length() > 0 && name.length()>0 && surname.length()>0){
                 if(userService.checkLogin(login)) resultPage=errorpage;
                 else {
-                    User user=new User(1,login,password,name,surname, UserRole.USER.ordinal());
+                    User user=new User(1,login, EncryptionUtil.md5(password),name,surname, UserRole.USER.ordinal());
                     userService.signUp(user);
                     UserUtil.putToSession(req,user);
                     resultPage = userpage;

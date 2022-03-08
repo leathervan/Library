@@ -21,9 +21,7 @@ public class BlockUnblockUSerGetCommand implements ServletCommand {
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String userID = req.getParameter("userID");
         User user = userService.getUserById(Integer.valueOf(userID));
-        System.out.println(user);
         userService.changeUserStatus(user.getId(),user.getBlocked());
-        System.out.println(userService.getUserById(Integer.valueOf(userID)));
         return blockedPage;
     }
 }

@@ -21,6 +21,5 @@ public class UserUtil {
                 session.setAttribute("role", "user");
                 break;
         }
-        session.setAttribute("authorized", true);
     }
 }

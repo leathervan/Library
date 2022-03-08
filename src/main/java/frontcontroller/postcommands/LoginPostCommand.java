@@ -5,6 +5,7 @@ import entity.user.User;
 import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import service.UserService;
+import util.EncryptionUtil;
 import util.MappingProperties;
 import util.UserUtil;
 
@@ -38,7 +39,7 @@ public class LoginPostCommand implements ServletCommand {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (login != null && password != null && login.length() > 0 && password.length() > 0) {
-            User user = userService.getUserByCredentials(login, password);
+            User user = userService.getUserByCredentials(login, EncryptionUtil.md5(password));
             if (user != null && !user.getBlocked()) {
                 UserUtil.putToSession(req,user);
                 switch (user.getRole_id()) {

@@ -72,9 +72,7 @@ CREATE TABLE IF NOT EXISTS `library`.`user` (
     ON DELETE cascade
     ON UPDATE cascade);
     
-insert into user value (default,'papijk@gmail.com','password','Danilo','Papizhuk',default,1);
-insert into user value (default,'karasax@gmail.com','password1','Alexander','Karas',default,2);
-insert into user value (default,'darkmisha2012@gmail.com','darkmisha2012','Mykhailo','Gienko',default,3);
+insert into user value (default,'papijk@gmail.com','df5195998fef006f099e22d6e8a5946b','Danilo','Papizhuk',default,1);
 
 -- -----------------------------------------------------
 -- Table `library`.`receipt_status`

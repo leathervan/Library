@@ -2,17 +2,21 @@ package dao.receipt;
 
 import connection.MyConnectionPool;
 import dao.QUERY;
+import dao.book.BookDaoImpl;
 import dao.user.UserDaoImpl;
 import entity.Book;
 import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
 import entity.user.User;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReceiptDaoImpl implements ReceiptDao{
+public class ReceiptDaoImpl implements ReceiptDao {
+
+    private static final Logger log = Logger.getLogger(ReceiptDaoImpl.class);
     private MyConnectionPool connectionPool;
 
     private ReceiptDaoImpl() {
@@ -97,17 +101,14 @@ public class ReceiptDaoImpl implements ReceiptDao{
             pstmt.setString(3,String.valueOf(ReceiptStatus.EXPECTED.ordinal()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("Receipt creation is failed");
+                log.error("Receipt creation is failed");
             } else {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        receipt.setId(generatedKeys.getInt(1));
-                    } else {
-                        System.out.println("Failed to create receipt, no obtained id");
-                    }
+                    if (generatedKeys.next()) receipt.setId(generatedKeys.getInt(1));
+                    else log.error("Failed to create receipt, no obtained id");
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
             receipt.setId(-1);
         }

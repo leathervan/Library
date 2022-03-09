@@ -1,26 +1,22 @@
 package frontcontroller.getcommands.worker;
 
-import dao.receipt.ReceiptDaoImpl;
 import dao.subscription.SubscriptionDaoImpl;
 import dto.SubscriptionDto;
-import entity.Book;
 import entity.Subscription;
-import entity.receipt.Receipt;
-import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
-import service.ReceiptService;
+import frontcontroller.getcommands.user.UserProfileGetCommand;
+import org.apache.log4j.Logger;
 import service.SubscriptionService;
 import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SubsGetCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(SubsGetCommand.class);
     private SubscriptionService subscriptionService;
     private static String subsPage;
     private static String sort;
@@ -34,6 +30,7 @@ public class SubsGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing worker subs page GET command");
         List<Subscription> subs = subscriptionService.getAllSubscription();
         List<SubscriptionDto> subscriptionDtos=new ArrayList<>();
         sortSubs(req,subs,subscriptionDtos);

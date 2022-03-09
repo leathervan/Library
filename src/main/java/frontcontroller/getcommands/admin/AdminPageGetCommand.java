@@ -3,6 +3,7 @@ package frontcontroller.getcommands.admin;
 import dao.book.BookDaoImpl;
 import entity.Book;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import util.MappingProperties;
 
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdminPageGetCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(AdminPageGetCommand.class);
     private BookService bookService;
     private static String adminPage;
     private static final Integer countPage = 10;
@@ -26,6 +29,7 @@ public class AdminPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing admin start page GET command");
         List<Book> books=bookService.getAllBook();
 
         pagination(req,books);
@@ -34,6 +38,7 @@ public class AdminPageGetCommand implements ServletCommand {
     }
 
     private void searchBooks(HttpServletRequest req,List<Book> books){
+        log.info("Searching books on admin page GET command");
         String search = req.getParameter("search");
         if(search != null && search.length()>0){
             if(books!=null) {
@@ -51,6 +56,7 @@ public class AdminPageGetCommand implements ServletCommand {
             else req.setAttribute("countPage",(books.size()/countPage));
         }
     }
+
     private void pagination(HttpServletRequest req,List<Book> books){
         if(books.size()%countPage==0) req.setAttribute("countPage",(books.size()/countPage));
         else req.setAttribute("countPage",(books.size()/countPage) + 1);//pagination view

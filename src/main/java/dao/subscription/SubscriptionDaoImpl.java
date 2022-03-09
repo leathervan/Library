@@ -7,12 +7,15 @@ import entity.Book;
 import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriptionDaoImpl implements SubscriptionDao{
+public class SubscriptionDaoImpl implements SubscriptionDao {
+
+    private static final Logger log = Logger.getLogger(SubscriptionDaoImpl.class);
     private MyConnectionPool connectionPool;
 
     private SubscriptionDaoImpl() {
@@ -75,14 +78,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao{
             pstmt.setString(2,String.valueOf(subscription.getBook_id()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("Subs creation is failed");
+                log.error("Subs creation is failed");
             } else {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        subscription.setId(generatedKeys.getInt(1));
-                    } else {
-                        System.out.println("Failed to create sub, no obtained id");
-                    }
+                    if (generatedKeys.next()) subscription.setId(generatedKeys.getInt(1));
+                    else log.error("Failed to create sub, no obtained id");
                 }
             }
         }catch (SQLException e){

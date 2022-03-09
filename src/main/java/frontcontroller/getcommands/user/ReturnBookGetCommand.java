@@ -1,4 +1,4 @@
-package frontcontroller.getcommands;
+package frontcontroller.getcommands.user;
 
 import dao.book.BookDaoImpl;
 import dao.receipt.ReceiptDaoImpl;
@@ -10,6 +10,7 @@ import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
 import entity.user.User;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
 import service.SubscriptionService;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ReturnBookGetCommand implements ServletCommand{
+
+    private static final Logger log = Logger.getLogger(ReturnBookGetCommand.class);
     private static String bookReturnPage;
     private SubscriptionService subscriptionService;
     private BookService bookService;
@@ -35,11 +38,12 @@ public class ReturnBookGetCommand implements ServletCommand{
     }
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing book return page GET command");
         String subID = req.getParameter("subID");
         if(subID != null && subID.length()>0){
-            Subscription subscription=subscriptionService.getSubscription(Long.valueOf(subID));
-            User user= userService.getUserById(subscription.getUser_id());
-            Book book=bookService.getBook(subscription.getBook_id());
+            Subscription subscription = subscriptionService.getSubscription(Long.valueOf(subID));
+            User user = userService.getUserById(subscription.getUser_id());
+            Book book = bookService.getBook(subscription.getBook_id());
             Receipt receipt=receiptService.getReceiptByUserAndBookId(user.getId().toString(),book.getId().toString());
             receiptService.changeStatus(receipt, ReceiptStatus.COMPLETED.ordinal());
             bookService.increaseBookAmount(bookService.getBook(subscription.getBook_id()));

@@ -1,4 +1,4 @@
-package frontcontroller.getcommands;
+package frontcontroller.getcommands.user;
 
 import dao.book.BookDaoImpl;
 import dao.receipt.ReceiptDaoImpl;
@@ -8,6 +8,7 @@ import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
 import entity.user.User;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
 import service.UserService;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class OrderGetCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(OrderGetCommand.class);
     private static String orderPage;
     private static String orderExistPage;
     private ReceiptService receiptService;
@@ -32,6 +35,7 @@ public class OrderGetCommand implements ServletCommand {
     }
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing order page GET command");
         String userID = req.getParameter("userID");
         String bookID = req.getParameter("bookID");
         if(userID != null && bookID != null && userID.length()>0 && bookID.length()>0){

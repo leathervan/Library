@@ -2,13 +2,17 @@ package dao.user;
 
 import connection.MyConnectionPool;
 import dao.QUERY;
+import dao.receipt.ReceiptDaoImpl;
 import entity.user.User;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
+
+    private static final Logger log = Logger.getLogger(UserDaoImpl.class);
     private MyConnectionPool connectionPool;
 
     private UserDaoImpl() {
@@ -74,14 +78,11 @@ public class UserDaoImpl implements UserDao{
             pstmt.setString(5,String.valueOf(user.getRole_id()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("User creation is failed");
+                log.error("User creation is failed");
             } else {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        user.setId(generatedKeys.getInt(1));
-                    } else {
-                        System.out.println("Failed to create user, no obtained id");
-                    }
+                    if (generatedKeys.next()) user.setId(generatedKeys.getInt(1));
+                    else log.error("Failed to create user, no obtained id");
                 }
             }
         }catch (SQLException e){
@@ -172,8 +173,6 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void changeStatus(long userId, boolean status) {
-        System.out.println(userId);
-        System.out.println(status);
         Connection connection= connectionPool.getConnection();
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.BLOCK_USER.query());

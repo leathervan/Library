@@ -9,6 +9,8 @@ import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
 import frontcontroller.ServletCommand;
+import frontcontroller.getcommands.user.UserProfileGetCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
 import service.SubscriptionService;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ApproveOrderGetCommand implements ServletCommand {
+    private static final Logger log = Logger.getLogger(ApproveOrderGetCommand.class);
     private UserService userService;
     private BookService bookService;
     private ReceiptService receiptService;
@@ -38,6 +41,7 @@ public class ApproveOrderGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Approving order page GET command");
         String resultpage = approveOrderPage;
         String receipt_id = req.getParameter("receiptID");
         Receipt receipt=receiptService.getReceipt(Integer.valueOf(receipt_id));

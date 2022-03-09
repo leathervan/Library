@@ -1,11 +1,15 @@
 package util;
 
+import org.apache.log4j.Logger;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncryptionUtil {
     public static String md5(String str) {
+        Logger.getLogger(EncryptionUtil.class).info("Password encryption process");
+
         MessageDigest md5 = null;
         byte[] bytes = new byte[0];
 

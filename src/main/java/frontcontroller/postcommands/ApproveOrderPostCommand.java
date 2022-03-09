@@ -11,6 +11,7 @@ import entity.receipt.ReceiptStatus;
 import entity.user.User;
 import entity.user.UserRole;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
 import service.SubscriptionService;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 
 public class ApproveOrderPostCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(ApproveOrderPostCommand.class);
     private SubscriptionService subscriptionService;
     private ReceiptService receiptService;
     private BookService bookService;
@@ -38,6 +41,7 @@ public class ApproveOrderPostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Approving order page POST command");
         String datetime = req.getParameter("datetime");
         datetime.replace('T',' ');
         Subscription subscription = subscriptionService.getSubscription(Integer.valueOf(req.getParameter("subID")));

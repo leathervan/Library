@@ -8,6 +8,9 @@ import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
+import frontcontroller.getcommands.admin.WorkersGetCommand;
+import frontcontroller.getcommands.user.UserProfileGetCommand;
+import org.apache.log4j.Logger;
 import service.ReceiptService;
 import util.MappingProperties;
 
@@ -19,6 +22,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorkerPageGetCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(WorkersGetCommand.class);
     private ReceiptService receiptService;
     private static String workerPage;
     private static String status;
@@ -32,6 +37,7 @@ public class WorkerPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing worker page GET command");
         List<Receipt> receipts = receiptService.getAllReceipt();
         pagination(req,receipts);
         return workerPage;

@@ -1,16 +1,15 @@
 package frontcontroller.getcommands;
 
-import dao.book.BookDaoImpl;
-import entity.Book;
 import frontcontroller.ServletCommand;
-import service.BookService;
+import frontcontroller.getcommands.admin.WorkersGetCommand;
+import org.apache.log4j.Logger;
 import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 public class ErrorGetCommand implements ServletCommand {
+    private static final Logger log = Logger.getLogger(ErrorGetCommand.class);
     private static String errorPage;
 
     public ErrorGetCommand() {
@@ -20,6 +19,7 @@ public class ErrorGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing error page GET command");
         return errorPage;
     }
 }

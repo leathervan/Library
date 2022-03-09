@@ -2,6 +2,7 @@ package frontcontroller;
 
 import frontcontroller.getcommands.*;
 import frontcontroller.getcommands.admin.*;
+import frontcontroller.getcommands.user.*;
 import frontcontroller.getcommands.worker.ApproveOrderGetCommand;
 import frontcontroller.getcommands.worker.SubsGetCommand;
 import frontcontroller.getcommands.worker.WorkerPageGetCommand;
@@ -37,7 +38,7 @@ public class CommandManager {
         getCommands.put("/adminCustomers", new UsersGetCommand());
         getCommands.put("/deleteworker",new DeleteWorkerGetCommand());
         getCommands.put("/addworker",new AddWorkerGetCommand());
-        getCommands.put("/blockuser", new BlockUnblockUSerGetCommand());
+        getCommands.put("/blockuser", new BlockUnblockUserGetCommand());
 
         postCommands.put("/signup", new SignupPostCommand());
         postCommands.put("/login", new LoginPostCommand());
@@ -65,9 +66,7 @@ public class CommandManager {
 
     private String getMapping(HttpServletRequest req) {
         String mapping = req.getRequestURI().substring(req.getContextPath().length());
-        if (mapping.endsWith("/")) {
-            mapping = mapping.substring(0, mapping.length() - 1);
-        }
+        if (mapping.endsWith("/")) mapping = mapping.substring(0, mapping.length() - 1);
         return mapping;
     }
 }

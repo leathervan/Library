@@ -3,6 +3,7 @@ package frontcontroller.postcommands;
 import dao.book.BookDaoImpl;
 import entity.Book;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import util.MappingProperties;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditBookPostCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(EditBookPostCommand.class);
     private BookService bookService;
     private String adminPage;
     private String errorPage;
@@ -22,6 +25,7 @@ public class EditBookPostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Editing book POST command");
         String resultPage = adminPage;
         Book oldbook = bookService.getBook(Integer.valueOf(req.getParameter("bookID")));
         Book newbook = bookService.getBook(Integer.valueOf(req.getParameter("bookID")));

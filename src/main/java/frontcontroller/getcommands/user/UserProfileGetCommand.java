@@ -1,4 +1,4 @@
-package frontcontroller.getcommands;
+package frontcontroller.getcommands.user;
 
 import dao.receipt.ReceiptDaoImpl;
 import dao.subscription.SubscriptionDaoImpl;
@@ -9,6 +9,7 @@ import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.ReceiptService;
 import service.SubscriptionService;
 import service.UserService;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfileGetCommand implements ServletCommand{
+
+    private static final Logger log = Logger.getLogger(UserProfileGetCommand.class);
     private SubscriptionService subscriptionService;
     private UserService userService;
     private ReceiptService receiptService;
@@ -36,12 +39,13 @@ public class UserProfileGetCommand implements ServletCommand{
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing user's profile page GET command");
         HttpSession session = req.getSession();
         User user=userService.getUserById(Integer.valueOf(session.getAttribute("id").toString()));
-        List<Subscription> subs=subscriptionService.getUserSubscription(user);
-        List<Receipt> receipts=receiptService.getReceiptsByUserId(user);
-        List<SubscriptionDto> subscriptionDtos=new ArrayList<>();
-        List<ReceiptDto> receiptDtos=new ArrayList<>();
+        List<Subscription> subs = subscriptionService.getUserSubscription(user);
+        List<Receipt> receipts = receiptService.getReceiptsByUserId(user);
+        List<SubscriptionDto> subscriptionDtos = new ArrayList<>();
+        List<ReceiptDto> receiptDtos = new ArrayList<>();
         convertToSubscriptionDto(subs,subscriptionDtos);
         convertToReceiptDto(receipts,receiptDtos);
         req.setAttribute("subs",subscriptionDtos);

@@ -19,15 +19,15 @@ public class SubscriptionDto {
     private Book book;
 
     public SubscriptionDto(Subscription subscription){
-        UserService userService=new UserService(UserDaoImpl.getInstance());
-        BookService bookService=new BookService(BookDaoImpl.getInstance());
+        UserService userService = new UserService(UserDaoImpl.getInstance());
+        BookService bookService = new BookService(BookDaoImpl.getInstance());
 
-        id=subscription.getId();
-        start=subscription.getStart();
-        end=subscription.getEnd();
-        debt=subscription.getDebt();
-        user=userService.getUserById(subscription.getUser_id());
-        book=bookService.getBook(subscription.getBook_id());
+        id = subscription.getId();
+        start = subscription.getStart();
+        end = subscription.getEnd();
+        debt = subscription.getDebt();
+        user = userService.getUserById(subscription.getUser_id());
+        book = bookService.getBook(subscription.getBook_id());
     }
 
     @Override

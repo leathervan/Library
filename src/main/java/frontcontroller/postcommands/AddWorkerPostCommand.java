@@ -1,12 +1,10 @@
 package frontcontroller.postcommands;
 
-import dao.book.BookDaoImpl;
 import dao.user.UserDaoImpl;
-import entity.Book;
 import entity.user.User;
 import entity.user.UserRole;
 import frontcontroller.ServletCommand;
-import service.BookService;
+import org.apache.log4j.Logger;
 import service.UserService;
 import util.EncryptionUtil;
 import util.MappingProperties;
@@ -15,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddWorkerPostCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(AddWorkerPostCommand.class);
     private UserService userService;
     private String adminPage;
     private String errorPage;
@@ -27,6 +27,7 @@ public class AddWorkerPostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Adding worker POST command");
         String resultPage = adminPage;
         String email = req.getParameter("email");
         String password = req.getParameter("password");

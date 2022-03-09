@@ -1,12 +1,15 @@
 package util;
 
 import entity.user.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class UserUtil {
     public static void putToSession(HttpServletRequest req, User user) {
+        Logger.getLogger(UserUtil.class).info("User put to session process");
+
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
         session.setAttribute("id",user.getId());

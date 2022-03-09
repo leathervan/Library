@@ -1,22 +1,21 @@
-package frontcontroller.getcommands;
+package frontcontroller.getcommands.user;
 
 import dao.book.BookDaoImpl;
 import entity.Book;
-import entity.Subscription;
-import entity.receipt.Receipt;
-import entity.receipt.ReceiptStatus;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import util.MappingProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserPageGetCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(UserPageGetCommand.class);
     private BookService bookService;
     private static String userPage;
     private static final Integer countPage = 3;
@@ -30,6 +29,7 @@ public class UserPageGetCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing user page GET command");
         List<Book> books=bookService.getAllBook();
 
         pagination(req,books);
@@ -38,6 +38,7 @@ public class UserPageGetCommand implements ServletCommand {
     }
 
     private void searchBooks(HttpServletRequest req,List<Book> books){
+        log.info("Searching book user GET command");
         String search = req.getParameter("search");
         if(search != null && search.length()>0){
             if(books!=null) {

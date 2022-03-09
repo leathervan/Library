@@ -3,6 +3,8 @@ package frontcontroller.postcommands;
 import dao.book.BookDaoImpl;
 import entity.Book;
 import frontcontroller.ServletCommand;
+import frontcontroller.getcommands.SignupGetCommand;
+import org.apache.log4j.Logger;
 import service.BookService;
 import util.MappingProperties;
 
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddBookPostCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(AddBookPostCommand.class);
     private BookService bookService;
     private String adminPage;
     private String errorPage;
@@ -22,6 +26,7 @@ public class AddBookPostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Adding book POST command");
         String resultPage = adminPage;
         Book newbook = new Book();
         String name = req.getParameter("name");

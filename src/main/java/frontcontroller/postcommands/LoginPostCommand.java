@@ -2,8 +2,8 @@ package frontcontroller.postcommands;
 
 import dao.user.UserDaoImpl;
 import entity.user.User;
-import entity.user.UserRole;
 import frontcontroller.ServletCommand;
+import org.apache.log4j.Logger;
 import service.UserService;
 import util.EncryptionUtil;
 import util.MappingProperties;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginPostCommand implements ServletCommand {
+
+    private static final Logger log = Logger.getLogger(LoginPostCommand.class);
     private UserService userService;
     private static String loginPage;
     private static String homepage;
@@ -35,6 +37,7 @@ public class LoginPostCommand implements ServletCommand {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        log.info("Executing login page POST command");
         String resultPage = errorpage;
         String login = req.getParameter("login");
         String password = req.getParameter("password");

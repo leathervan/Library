@@ -16,14 +16,14 @@ public class ReceiptDto {
     private ReceiptStatus status;
 
     public ReceiptDto(Receipt receipt){
-        UserService userService=new UserService(UserDaoImpl.getInstance());
-        BookService bookService=new BookService(BookDaoImpl.getInstance());
-        ReceiptStatus[] receiptStatus=ReceiptStatus.values();
+        UserService userService = new UserService(UserDaoImpl.getInstance());
+        BookService bookService = new BookService(BookDaoImpl.getInstance());
+        ReceiptStatus[] receiptStatus = ReceiptStatus.values();
 
-        id= receipt.getId();
-        user=userService.getUserById(receipt.getUser_id());
-        book=bookService.getBook(receipt.getBook_id());
-        status=receiptStatus[receipt.getStatus()];
+        id = receipt.getId();
+        user = userService.getUserById(receipt.getUser_id());
+        book = bookService.getBook(receipt.getBook_id());
+        status = receiptStatus[receipt.getStatus()];
     }
 
     public Integer getId() {

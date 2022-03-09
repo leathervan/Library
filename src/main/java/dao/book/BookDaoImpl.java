@@ -3,12 +3,15 @@ package dao.book;
 import connection.MyConnectionPool;
 import dao.QUERY;
 import entity.Book;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDaoImpl implements BookDao{
+
+    private static final Logger log = Logger.getLogger(BookDaoImpl.class);
     private MyConnectionPool connectionPool;
 
     private BookDaoImpl() {
@@ -74,17 +77,14 @@ public class BookDaoImpl implements BookDao{
             pstmt.setString(5,String.valueOf(book.getAmount()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("Book creation is failed");
+                log.error("Book creation is failed");
             } else {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        book.setId(generatedKeys.getInt(1));
-                    } else {
-                        System.out.println("Failed to create book, no obtained id");
-                    }
+                    if (generatedKeys.next()) book.setId(generatedKeys.getInt(1));
+                    else log.error("Failed to create book, no obtained id");
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e){
             book.setId(-1);
             e.printStackTrace();
         }

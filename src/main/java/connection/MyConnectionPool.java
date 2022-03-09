@@ -1,5 +1,7 @@
 package connection;
 
+import org.apache.log4j.Logger;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -14,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class MyConnectionPool implements ConnectionPool{
+public class MyConnectionPool implements ConnectionPool {
+
+    private static final Logger log = Logger.getLogger(MyConnectionPool.class);
     private static final int INITIAL_POOL_SIZE = 10;
     private static final int MAX_POOL_SIZE = 40;
     private static final int MAX_TIMEOUT = 5;
@@ -48,6 +52,7 @@ public class MyConnectionPool implements ConnectionPool{
         try {
             Context initialContext = new InitialContext();
             DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/library");
+            log.info("Connection is created");
             return dataSource.getConnection();
         }catch (NamingException e){
             e.printStackTrace();
@@ -65,6 +70,7 @@ public class MyConnectionPool implements ConnectionPool{
                     e.printStackTrace();
                 }
             } else {
+                log.error("Maximum pool size reached, no available connections!");
                 throw new RuntimeException("Maximum pool size reached, no available connections!");
             }
         }
@@ -81,6 +87,7 @@ public class MyConnectionPool implements ConnectionPool{
 
     @Override
     public boolean releaseConnection(Connection connection) {
+        log.info("Connection was released");
         availableConnections.add(connection);
         return usedConnections.remove(connection);
     }
@@ -101,5 +108,6 @@ public class MyConnectionPool implements ConnectionPool{
         for (Connection connection:availableConnections){
             connection.close();
         }
+        log.info("Closing all connections");
     }
 }

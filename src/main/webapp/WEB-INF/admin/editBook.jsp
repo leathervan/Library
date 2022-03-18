@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="message"/>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -13,10 +16,10 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/admin"><span class="mb-0 h2">Library</span> </a>
+        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/admin"><span class="mb-0 h2"><fmt:message key="index.library"/></span> </a>
         <form class="d-flex">
             <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/admin" class="btn btn-primary">Go back</a>
+                <a href="${pageContext.request.contextPath}/admin" class="btn btn-primary"><fmt:message key="index.back"/></a>
             </div>
         </form>
     </div>
@@ -26,11 +29,11 @@
 <table class="table w-75 p-3">
     <thead class="table-dark">
     <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Author</th>
-        <th scope="col">Edition</th>
-        <th scope="col">Year Edition</th>
-        <th scope="col">Amount</th>
+        <th scope="col"><fmt:message key="book.name"/></th>
+        <th scope="col"><fmt:message key="book.author"/></th>
+        <th scope="col"><fmt:message key="book.edition"/></th>
+        <th scope="col"><fmt:message key="book.year"/></th>
+        <th scope="col"><fmt:message key="book.amount"/></th>
         <th scope="col"></th>
     </tr>
     </thead>

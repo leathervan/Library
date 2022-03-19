@@ -19,16 +19,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img src="img/navbar_logo.jpg">
     <div class="container-fluid">
-        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/worker"><span class="mb-0 h2">Library</span> </a>
+        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/worker"><span class="mb-0 h2"><fmt:message key="index.library"/></span> </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/worker">Receipts</a>
-                <a class="nav-link active" href="${pageContext.request.contextPath}/subs">Subscriptions</a>
+                <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/worker"><fmt:message key="worker.receipts"/></a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/subs"><fmt:message key="worker.subs"/></a>
             </div>
         </div>
         <form class="d-flex">
             <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/" class="btn btn-danger">Logout</a>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-danger"><fmt:message key="index.logout"/></a>
             </div>
         </form>
     </div>
@@ -36,15 +36,15 @@
 <table class="table table-dark table-striped w-25 p-3">
     <tbody>
     <tr>
-        <th>email</th>
+        <th><fmt:message key="index.email"/></th>
         <td><c:out value="${user.getEmail()}"/></td>
     </tr>
     <tr>
-        <th>Name</th>
+        <th><fmt:message key="index.name"/></th>
         <td><c:out value="${user.getName()}"/></td>
     </tr>
     <tr>
-        <th>Surname</th>
+        <th><fmt:message key="index.surname"/></th>
         <td><c:out value="${user.getSurname()}"/></td>
     </tr>
     </tbody>
@@ -52,16 +52,16 @@
 <form action="${pageContext.request.contextPath}/subs">
     <div class="input-group w-25">
         <input type="text" id="searchuser" name="searchuser" class="form-control" placeholder="Input user id" aria-describedby="basic-addon2">
-        <button class="btn btn-secondary" type="submit">Search</button>
+        <button class="btn btn-secondary" type="submit"><fmt:message key="index.search"/></button>
         <input type="text" id="searchbook" name="searchbook" class="form-control" placeholder="Input book id" aria-describedby="basic-addon2">
-        <button class="btn btn-secondary" type="submit">Search</button>
+        <button class="btn btn-secondary" type="submit"><fmt:message key="index.search"/></button>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><fmt:message key="worker.sort"/></button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=new">Sort by new</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=old">Sort by old</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=end">Sort by end</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=debt">Sort by debt</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=new"><fmt:message key="worker.bynew"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=old"><fmt:message key="worker.byold"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=end"><fmt:message key="worker.byend"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/subs?sort=debt"><fmt:message key="worker.bydebt"/></a>
             </ul>
         </div>
     </div>

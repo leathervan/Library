@@ -19,16 +19,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img src="img/navbar_logo.jpg">
     <div class="container-fluid">
-        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/worker"><span class="mb-0 h2">Library</span> </a>
+        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/worker"><span class="mb-0 h2"><fmt:message key="index.library"/></span> </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/worker">Receipts</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/subs">Subscriptions</a>
+                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/worker"><fmt:message key="worker.receipts"/></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/subs"><fmt:message key="worker.subs"/></a>
             </div>
         </div>
         <form class="d-flex">
             <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/" class="btn btn-danger">Logout</a>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-danger"><fmt:message key="index.logout"/></a>
             </div>
         </form>
     </div>
@@ -36,26 +36,26 @@
 <table class="table table-dark table-striped w-25 p-3">
     <tbody>
     <tr>
-        <th>email</th>
+        <th><fmt:message key="index.email"/></th>
         <td><c:out value="${user.getEmail()}"/></td>
     </tr>
     <tr>
-        <th>Name</th>
+        <th><fmt:message key="index.name"/></th>
         <td><c:out value="${user.getName()}"/></td>
     </tr>
     <tr>
-        <th>Surname</th>
+        <th><fmt:message key="index.surname"/></th>
         <td><c:out value="${user.getSurname()}"/></td>
     </tr>
     </tbody>
 </table>
 <form action="${pageContext.request.contextPath}/worker">
     <div class="d-flex">
-        <a href="${pageContext.request.contextPath}/worker?status=EXPECTED" class="btn btn-secondary btn-sm">EXPECTED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=SUBSCRIPTION" class="btn btn-secondary btn-sm">SUBSCRIPTION</a>
-        <a href="${pageContext.request.contextPath}/worker?status=COMPLETED" class="btn btn-secondary btn-sm">COMPLETED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=DENIED" class="btn btn-secondary btn-sm">DENIED</a>
-        <a href="${pageContext.request.contextPath}/worker?status=ALL" class="btn btn-secondary btn-sm">ALL</a>
+        <a href="${pageContext.request.contextPath}/worker?status=EXPECTED" class="btn btn-secondary btn-sm"><fmt:message key="worker.expected"/></a>
+        <a href="${pageContext.request.contextPath}/worker?status=SUBSCRIPTION" class="btn btn-secondary btn-sm"><fmt:message key="worker.sub"/></a>
+        <a href="${pageContext.request.contextPath}/worker?status=COMPLETED" class="btn btn-secondary btn-sm"><fmt:message key="worker.completed"/></a>
+        <a href="${pageContext.request.contextPath}/worker?status=DENIED" class="btn btn-secondary btn-sm"><fmt:message key="worker.denied"/></a>
+        <a href="${pageContext.request.contextPath}/worker?status=ALL" class="btn btn-secondary btn-sm"><fmt:message key="worker.all"/></a>
     </div>
 </form>
 <nav aria-label="...">
@@ -91,7 +91,7 @@
             <td><c:out value="${receipt.getBook().getAuthor()}"/></td>
             <td><c:out value="${receipt.getStatus()}"/></td>
             <c:if test="${receipt.getStatus() == 'EXPECTED'}">
-                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}">Approve</a></td>
+                <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}"><fmt:message key="worker.approve" /></a></td>
             </c:if>
         </tr>
         </c:forEach>

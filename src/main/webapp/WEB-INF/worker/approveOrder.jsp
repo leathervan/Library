@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center align-items-center" >
                 <div class="error-template">
-                    <h1> Input date and time of return book</h1>
+                    <h1> <fmt:message key="worker.info"/></h1>
                     <br>
                     <table class="table w-75 p-3">
                         <thead class="table-dark">
@@ -47,7 +47,7 @@
                     </table>
                     <input id="datetime" name="datetime" type="datetime-local">
                     <form>
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Approve</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit"><fmt:message key="worker.approve"/> </button>
                     </form>
                 </div>
             </div>

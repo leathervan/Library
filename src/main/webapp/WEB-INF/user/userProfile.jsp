@@ -19,32 +19,40 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <img src="img/navbar_logo.jpg">
   <div class="container-fluid">
-    <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2">Library</span> </a>
+    <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2"><fmt:message key="index.library"/></span> </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/user">Search</a>
-        <a class="nav-link active" href="${pageContext.request.contextPath}/userProfile">Subscriptions and receipts</a>
+        <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/user"><fmt:message key="index.search"/></a>
+        <a class="nav-link active" href="${pageContext.request.contextPath}/userProfile"><fmt:message key="user.subs"/></a>
       </div>
     </div>
     <form class="d-flex">
       <div class="btn-group">
-        <a href="${pageContext.request.contextPath}/" class="btn btn-danger">Logout</a>
+        <a href="${pageContext.request.contextPath}/" class="btn btn-danger"><fmt:message key="index.logout"/></a>
       </div>
     </form>
   </div>
 </nav>
+<div class="position-absolute bottom-0 end-0">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/userProfile?sessionLocale=en">en</a></li>
+      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/userProfile?sessionLocale=ru">ru</a></li>
+    </ul>
+  </nav>
+</div>
 <table class="table table-dark table-striped w-25 p-3">
   <tbody>
   <tr>
-    <th>email</th>
+    <th><fmt:message key="index.email"/></th>
     <td><c:out value="${user.getEmail()}"/></td>
   </tr>
   <tr>
-    <th>Name</th>
+    <th><fmt:message key="index.name"/></th>
     <td><c:out value="${user.getName()}"/></td>
   </tr>
   <tr>
-    <th>Surname</th>
+    <th><fmt:message key="index.surname"/></th>
     <td><c:out value="${user.getSurname()}"/></td>
   </tr>
   </tbody>
@@ -71,7 +79,7 @@
         <td><c:out value="${sub.getDebt()}"/></td>
         <td><c:out value="${sub.getBook().getId()}"/></td>
         <td><c:out value="${sub.getBook().getName()}"/></td>
-        <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/returnbook?subID=${sub.getId()}">Return book</a></td>
+        <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/returnbook?subID=${sub.getId()}"><fmt:message key="user.return"/></a></td>
       </tr>
     </c:forEach>
     </tbody>
@@ -95,7 +103,7 @@
         <td><c:out value="${receipt.getBook().getName()}"/></td>
         <td><c:out value="${receipt.getBook().getAuthor()}"/></td>
         <td><c:out value="${receipt.getStatus()}"/></td>
-        <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/rejectorder?receiptID=${receipt.getId()}">Reject order</a></td>
+        <td><a class="btn btn-secondary" href="${pageContext.request.contextPath}/rejectorder?receiptID=${receipt.getId()}"><fmt:message key="user.reject"/></a></td>
       </tr>
     </c:forEach>
     </tbody>

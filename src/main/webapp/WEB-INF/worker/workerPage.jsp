@@ -33,6 +33,14 @@
         </form>
     </div>
 </nav>
+<div class="position-absolute bottom-0 end-0">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/worker?sessionLocale=en">en</a></li>
+            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/worker?sessionLocale=ru">ru</a></li>
+        </ul>
+    </nav>
+</div>
 <table class="table table-dark table-striped w-25 p-3">
     <tbody>
     <tr>

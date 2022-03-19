@@ -19,31 +19,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <img src="img/navbar_logo.jpg">
     <div class="container-fluid">
-        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2">Library</span> </a>
+        <a class="navbar-brand font-size" href="${pageContext.request.contextPath}/user"><span class="mb-0 h2"><fmt:message key="index.library"/></span> </a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/user">Search</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/userProfile">Subscriptions and receipts</a>
+                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/user"><fmt:message key="index.search"/></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/userProfile"><fmt:message key="user.subs"/></a>
             </div>
         </div>
         <form class="d-flex">
             <div class="btn-group">
-                <a href="${pageContext.request.contextPath}/" class="btn btn-danger">Logout</a>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-danger"><fmt:message key="index.logout"/></a>
             </div>
         </form>
     </div>
 </nav>
+<div class="position-absolute bottom-0 end-0">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/user?sessionLocale=en">en</a></li>
+            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/user?sessionLocale=ru">ru</a></li>
+        </ul>
+    </nav>
+</div>
 <form action="${pageContext.request.contextPath}/user">
     <div class="input-group w-25">
         <input type="text" id="search" name="search" class="form-control" placeholder="Input name or author's name" aria-describedby="basic-addon2">
-        <button class="btn btn-secondary" type="submit">Search</button>
+        <button class="btn btn-secondary" type="submit"><fmt:message key="index.search"/></button>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><fmt:message key="worker.sort"/></button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=name">Sort by name</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=author">Sort by author</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=edition">Sort by edition</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=year">Sort by year edition</a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=name"><fmt:message key="user.sort.name"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=author"><fmt:message key="user.sort.author"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=edition"><fmt:message key="user.sort.edition"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/user?sort=year"><fmt:message key="user.sort.year"/></a>
             </ul>
         </div>
     </div>
@@ -59,11 +67,11 @@
     <thead class="table-dark">
     <tr>
         <th scope="col">id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Author</th>
-        <th scope="col">Edition</th>
-        <th scope="col">Year Edition</th>
-        <th scope="col">Amount</th>
+        <th scope="col"><fmt:message key="book.name"/></th>
+        <th scope="col"><fmt:message key="book.author"/></th>
+        <th scope="col"><fmt:message key="book.edition"/></th>
+        <th scope="col"><fmt:message key="book.year"/></th>
+        <th scope="col"><fmt:message key="book.amount"/></th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -76,7 +84,7 @@
             <td><c:out value="${book.getEdition()}"/></td>
             <td><c:out value="${book.getYear_edition()}"/></td>
             <td><c:out value="${book.getAmount()}"/></td>
-            <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/orderbook?bookID=${book.getId()}&userID=${user.getId()}">Order book</a></td>
+            <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/orderbook?bookID=${book.getId()}&userID=${user.getId()}"><fmt:message key="user.order.book"/></a></td>
         </tr>
     </c:forEach>
     </tbody>

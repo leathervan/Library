@@ -21,11 +21,10 @@
                         <a href="${pageContext.request.contextPath}/login" class="btn btn-lg btn-block btn-primary" type="submit"><fmt:message key="index.signin"/></a>
                         <a href="${pageContext.request.contextPath}/signup" class="btn btn-lg btn-block btn-secondary" type="submit"><fmt:message key="index.signup"/></a>
                     </div>
-                    <nav aria-label="Page navigation example">
+                    <nav>
                         <ul class="pagination justify-content-center">
                             <li class="page-item"><a class="page-link" href="index.jsp?sessionLocale=en">en</a></li>
                             <li class="page-item"><a class="page-link" href="index.jsp?sessionLocale=ru">ru</a></li>
-                            <li class="page-item"><a class="page-link" href="#">ua</a></li>
                         </ul>
                     </nav>
                 </div>

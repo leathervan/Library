@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags" %>
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="message"/>
 <html>
@@ -90,14 +91,7 @@
         <tbody>
         <c:forEach items="${receipts}" var="receipt">
         <tr>
-            <td><c:out value="${receipt.getId()}"/></td>
-            <td><c:out value="${receipt.getUser().getId()}"/></td>
-            <td><c:out value="${receipt.getUser().getName()}"/></td>
-            <td><c:out value="${receipt.getUser().getSurname()}"/></td>
-            <td><c:out value="${receipt.getBook().getId()}"/></td>
-            <td><c:out value="${receipt.getBook().getName()}"/></td>
-            <td><c:out value="${receipt.getBook().getAuthor()}"/></td>
-            <td><c:out value="${receipt.getStatus()}"/></td>
+            <m:showReceipt receipt="${receipt}"></m:showReceipt>
             <c:if test="${receipt.getStatus() == 'EXPECTED'}">
                 <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/approve?receiptID=${receipt.getId()}"><fmt:message key="worker.approve" /></a></td>
             </c:if>

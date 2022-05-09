@@ -1,17 +1,15 @@
 package entity.receipt;
 
-import java.util.Objects;
-
 public class Receipt {
     private Integer id;
-    private Integer user_id;
-    private Integer book_id;
+    private Integer userId;
+    private Integer bookId;
     private Integer status;
 
-    public Receipt(Integer id, Integer user_id, Integer book_id, Integer status) {
+    public Receipt(Integer id, Integer userId, Integer bookId, Integer status) {
         this.id = id;
-        this.user_id = user_id;
-        this.book_id = book_id;
+        this.userId = userId;
+        this.bookId = bookId;
         this.status = status;
     }
 
@@ -19,8 +17,8 @@ public class Receipt {
     public String toString() {
         return "Receipt{" +
                 "id=" + id +
-                ", book_id=" + book_id +
-                ", user_id=" + user_id +
+                ", book_id=" + bookId +
+                ", user_id=" + userId +
                 ", status=" + status +
                 '}';
     }
@@ -30,7 +28,7 @@ public class Receipt {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Receipt receipt = (Receipt) o;
-        return id.equals(receipt.id) && user_id.equals(receipt.user_id) && book_id.equals(receipt.book_id) && status.equals(receipt.status);
+        return id.equals(receipt.id) && userId.equals(receipt.userId) && bookId.equals(receipt.bookId) && status.equals(receipt.status);
     }
 
     public Integer getId() {
@@ -41,20 +39,20 @@ public class Receipt {
         this.id = id;
     }
 
-    public Integer getBook_id() {
-        return book_id;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(Integer book_id) {
-        this.book_id = book_id;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getStatus() {

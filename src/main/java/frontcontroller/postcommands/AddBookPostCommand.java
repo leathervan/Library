@@ -3,7 +3,6 @@ package frontcontroller.postcommands;
 import dao.book.BookDaoImpl;
 import entity.Book;
 import frontcontroller.ServletCommand;
-import frontcontroller.getcommands.SignupGetCommand;
 import org.apache.log4j.Logger;
 import service.BookService;
 import util.MappingProperties;
@@ -37,7 +36,7 @@ public class AddBookPostCommand implements ServletCommand {
         if(name != null && name.length()>0) newbook.setName(name);
         if(author != null && author.length()>0) newbook.setAuthor(author);
         if(edition != null && edition.length()>0) newbook.setEdition(edition);
-        if(year != null && year.length()>0) newbook.setYear_edition(Integer.valueOf(year));
+        if(year != null && year.length()>0) newbook.setYearEdition(Integer.valueOf(year));
         if(amount != null && amount.length()>0 && Integer.valueOf(amount) >= 0) newbook.setAmount(Integer.valueOf(amount));
         bookService.createBook(newbook);
         return resultPage;

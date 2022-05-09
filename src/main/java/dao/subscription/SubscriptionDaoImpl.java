@@ -2,10 +2,7 @@ package dao.subscription;
 
 import connection.MyConnectionPool;
 import dao.QUERY;
-import dao.receipt.ReceiptDaoImpl;
-import entity.Book;
 import entity.Subscription;
-import entity.receipt.Receipt;
 import entity.user.User;
 import org.apache.log4j.Logger;
 
@@ -74,8 +71,8 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
         Connection connection= connectionPool.getConnection();
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_SUBSCRIPTION.query(),Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,String.valueOf(subscription.getUser_id()));
-            pstmt.setString(2,String.valueOf(subscription.getBook_id()));
+            pstmt.setString(1,String.valueOf(subscription.getUserId()));
+            pstmt.setString(2,String.valueOf(subscription.getBookId()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 log.error("Subs creation is failed");
@@ -102,8 +99,8 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.EDIT_SUBSCRIPTION.query());
             pstmt.setString(1,String.valueOf(newSubscription.getStart()));
             pstmt.setString(2,String.valueOf(newSubscription.getEnd()));
-            pstmt.setString(3,String.valueOf(newSubscription.getUser_id()));
-            pstmt.setString(4,String.valueOf(newSubscription.getBook_id()));
+            pstmt.setString(3,String.valueOf(newSubscription.getUserId()));
+            pstmt.setString(4,String.valueOf(newSubscription.getBookId()));
             pstmt.setString(5,String.valueOf(oldSubscription.getId()));
             pstmt.executeUpdate();
         }catch (SQLException e){

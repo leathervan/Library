@@ -42,7 +42,7 @@
             <td>${book.name}</td>
             <td>${book.author}</td>
             <td>${book.edition}</td>
-            <td>${book.year_edition}</td>
+            <td>${book.yearEdition}</td>
             <td>${book.amount}</td>
 
         </tr>

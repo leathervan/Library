@@ -42,11 +42,11 @@ public class ReturnBookGetCommand implements ServletCommand{
         String subID = req.getParameter("subID");
         if(subID != null && subID.length()>0){
             Subscription subscription = subscriptionService.getSubscription(Long.valueOf(subID));
-            User user = userService.getUserById(subscription.getUser_id());
-            Book book = bookService.getBook(subscription.getBook_id());
+            User user = userService.getUserById(subscription.getUserId());
+            Book book = bookService.getBook(subscription.getBookId());
             Receipt receipt=receiptService.getReceiptByUserAndBookId(user.getId().toString(),book.getId().toString());
             receiptService.changeStatus(receipt, ReceiptStatus.COMPLETED.ordinal());
-            bookService.increaseBookAmount(bookService.getBook(subscription.getBook_id()));
+            bookService.increaseBookAmount(bookService.getBook(subscription.getBookId()));
             subscriptionService.deleteSubscription(subscription);
         }
         return bookReturnPage;

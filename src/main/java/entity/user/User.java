@@ -7,27 +7,27 @@ public class User {
     private String name;
     private String surname;
     private Boolean blocked;
-    private Integer role_id;
+    private Integer roleId;
 
     public User() {}
 
-    public User(Integer id, String email, String password, String name, String surname, Integer role_id) {
+    public User(Integer id, String email, String password, String name, String surname, Integer roleId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.role_id = role_id;
+        this.roleId = roleId;
     }
 
-    public User(Integer id, String email, String password, String name, String surname, Boolean blocked, Integer role_id) {
+    public User(Integer id, String email, String password, String name, String surname, Boolean blocked, Integer roleId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.blocked = blocked;
-        this.role_id = role_id;
+        this.roleId = roleId;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", blocked=" + blocked +
-                ", role_id=" + role_id +
+                ", role_id=" + roleId +
                 '}';
     }
 
@@ -91,12 +91,12 @@ public class User {
         this.blocked = blocked;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }
 

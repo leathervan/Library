@@ -2,8 +2,6 @@ package dao.receipt;
 
 import connection.MyConnectionPool;
 import dao.QUERY;
-import dao.book.BookDaoImpl;
-import dao.user.UserDaoImpl;
 import entity.Book;
 import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
@@ -96,8 +94,8 @@ public class ReceiptDaoImpl implements ReceiptDao {
         Connection connection= connectionPool.getConnection();
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.CREATE_RECEIPT.query(),Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1,String.valueOf(receipt.getUser_id()));
-            pstmt.setString(2,String.valueOf(receipt.getBook_id()));
+            pstmt.setString(1,String.valueOf(receipt.getUserId()));
+            pstmt.setString(2,String.valueOf(receipt.getBookId()));
             pstmt.setString(3,String.valueOf(ReceiptStatus.EXPECTED.ordinal()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
@@ -123,8 +121,8 @@ public class ReceiptDaoImpl implements ReceiptDao {
         Connection connection= connectionPool.getConnection();
         try {
             PreparedStatement pstmt = connection.prepareStatement(QUERY.EDIT_RECEIPT.query());
-            pstmt.setString(1,String.valueOf(newReceipt.getUser_id()));
-            pstmt.setString(2,String.valueOf(newReceipt.getBook_id()));
+            pstmt.setString(1,String.valueOf(newReceipt.getUserId()));
+            pstmt.setString(2,String.valueOf(newReceipt.getBookId()));
             pstmt.setString(3,String.valueOf(newReceipt.getStatus()));
             pstmt.setString(5,String.valueOf(oldReceipt.getId()));
             pstmt.executeUpdate();

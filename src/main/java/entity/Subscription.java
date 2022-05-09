@@ -1,7 +1,5 @@
 package entity;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Subscription {
@@ -9,21 +7,21 @@ public class Subscription {
     private Timestamp start;
     private Timestamp end;
     private Integer debt;
-    private Integer user_id;
-    private Integer book_id;
+    private Integer userId;
+    private Integer bookId;
 
-    public Subscription(Integer id, Timestamp start, Timestamp end, Integer debt, Integer user_id, Integer book_id) {
+    public Subscription(Integer id, Timestamp start, Timestamp end, Integer debt, Integer userId, Integer bookId) {
         this.id = id;
         this.start = start;
         this.end = end;
         this.debt = debt;
-        this.user_id = user_id;
-        this.book_id = book_id;
+        this.userId = userId;
+        this.bookId = bookId;
     }
-    public Subscription(Integer id, Integer user_id, Integer book_id) {
+    public Subscription(Integer id, Integer userId, Integer bookId) {
         this.id = id;
-        this.user_id = user_id;
-        this.book_id = book_id;
+        this.userId = userId;
+        this.bookId = bookId;
     }
 
     @Override
@@ -33,8 +31,8 @@ public class Subscription {
                 ", start=" + start +
                 ", end=" + end +
                 ", debt=" + debt +
-                ", user_id=" + user_id +
-                ", book_id=" + book_id +
+                ", user_id=" + userId +
+                ", book_id=" + bookId +
                 '}';
     }
 
@@ -70,19 +68,19 @@ public class Subscription {
         this.debt = debt;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getBook_id() {
-        return book_id;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(Integer book_id) {
-        this.book_id = book_id;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 }

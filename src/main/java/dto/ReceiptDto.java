@@ -21,8 +21,8 @@ public class ReceiptDto {
         ReceiptStatus[] receiptStatus = ReceiptStatus.values();
 
         id = receipt.getId();
-        user = userService.getUserById(receipt.getUser_id());
-        book = bookService.getBook(receipt.getBook_id());
+        user = userService.getUserById(receipt.getUserId());
+        book = bookService.getBook(receipt.getBookId());
         status = receiptStatus[receipt.getStatus()];
     }
 

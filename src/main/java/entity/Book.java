@@ -1,28 +1,26 @@
 package entity;
 
-import java.util.Objects;
-
 public class Book {
     private Integer id;
     private String name;
     private String author;
     private String edition;
-    private Integer year_edition;
+    private Integer yearEdition;
     private Integer amount;
 
-    public Book(Integer id, String name, String author, String edition, Integer year_edition, Integer amount) {
+    public Book(Integer id, String name, String author, String edition, Integer yearEdition, Integer amount) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.edition = edition;
-        this.year_edition = year_edition;
+        this.yearEdition = yearEdition;
         this.amount = amount;
     }
-    public Book(String name, String author, String edition, Integer year_edition, Integer amount) {
+    public Book(String name, String author, String edition, Integer yearEdition, Integer amount) {
         this.name = name;
         this.author = author;
         this.edition = edition;
-        this.year_edition = year_edition;
+        this.yearEdition = yearEdition;
         this.amount = amount;
     }
     public Book() {
@@ -33,7 +31,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id.equals(book.id) && name.equals(book.name) && author.equals(book.author) && edition.equals(book.edition) && year_edition.equals(book.year_edition) && amount.equals(book.amount);
+        return id.equals(book.id) && name.equals(book.name) && author.equals(book.author) && edition.equals(book.edition) && yearEdition.equals(book.yearEdition) && amount.equals(book.amount);
     }
 
     @Override
@@ -43,7 +41,7 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", edition='" + edition + '\'' +
-                ", year_edition=" + year_edition +
+                ", year_edition=" + yearEdition +
                 ", amount=" + amount +
                 '}';
     }
@@ -80,12 +78,12 @@ public class Book {
         this.edition = edition;
     }
 
-    public Integer getYear_edition() {
-        return year_edition;
+    public Integer getYearEdition() {
+        return yearEdition;
     }
 
-    public void setYear_edition(Integer year_edition) {
-        this.year_edition = year_edition;
+    public void setYearEdition(Integer yearEdition) {
+        this.yearEdition = yearEdition;
     }
 
     public Integer getAmount() {

@@ -9,7 +9,6 @@ import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.user.User;
 import frontcontroller.ServletCommand;
-import frontcontroller.getcommands.user.UserProfileGetCommand;
 import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
@@ -45,8 +44,8 @@ public class ApproveOrderGetCommand implements ServletCommand {
         String resultpage = approveOrderPage;
         String receipt_id = req.getParameter("receiptID");
         Receipt receipt=receiptService.getReceipt(Integer.valueOf(receipt_id));
-        Book book=bookService.getBook(receipt.getBook_id());
-        User user=userService.getUserById(receipt.getUser_id());
+        Book book=bookService.getBook(receipt.getBookId());
+        User user=userService.getUserById(receipt.getUserId());
         Subscription subscription = subscriptionService.getSubscriptionByUserAndBookId(user.getId().toString(),book.getId().toString());
         if(subscription == null && book.getAmount()>0) subscription = subscriptionService.createSubscription(new Subscription(-1,user.getId(), book.getId()));
         else resultpage = bookNotAvailablePage;

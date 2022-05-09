@@ -26,8 +26,8 @@ public class SubscriptionDto {
         start = subscription.getStart();
         end = subscription.getEnd();
         debt = subscription.getDebt();
-        user = userService.getUserById(subscription.getUser_id());
-        book = bookService.getBook(subscription.getBook_id());
+        user = userService.getUserById(subscription.getUserId());
+        book = bookService.getBook(subscription.getBookId());
     }
 
     @Override

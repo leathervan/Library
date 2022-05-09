@@ -45,7 +45,7 @@ public class LoginPostCommand implements ServletCommand {
             User user = userService.getUserByCredentials(login, EncryptionUtil.md5(password));
             if (user != null && !user.getBlocked()) {
                 UserUtil.putToSession(req,user);
-                switch (user.getRole_id()) {
+                switch (user.getRoleId()) {
                     case 1:
                         resultPage = adminpage;
                         break;

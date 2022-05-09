@@ -92,7 +92,7 @@
             <td><c:out value="${book.getName()}"/></td>
             <td><c:out value="${book.getAuthor()}"/></td>
             <td><c:out value="${book.getEdition()}"/></td>
-            <td><c:out value="${book.getYear_edition()}"/></td>
+            <td><c:out value="${book.getYearEdition()}"/></td>
             <td><c:out value="${book.getAmount()}"/></td>
             <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/editbook?bookID=${book.getId()}"><fmt:message key="admin.editbook"/></a></td>
             <td><a class="btn btn-secondary d-grid gap-2 col-6 mx-auto" href="${pageContext.request.contextPath}/deletebook?bookID=${book.getId()}"><fmt:message key="admin.deletebook"/></a></td>

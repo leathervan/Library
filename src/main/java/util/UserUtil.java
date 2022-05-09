@@ -13,7 +13,7 @@ public class UserUtil {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
         session.setAttribute("id",user.getId());
-        switch (user.getRole_id()) {
+        switch (user.getRoleId()) {
             case 1:
                 session.setAttribute("role", "admin");
                 break;

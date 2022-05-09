@@ -3,25 +3,19 @@ package frontcontroller.postcommands;
 import dao.book.BookDaoImpl;
 import dao.receipt.ReceiptDaoImpl;
 import dao.subscription.SubscriptionDaoImpl;
-import dao.user.UserDaoImpl;
 import entity.Book;
 import entity.Subscription;
 import entity.receipt.Receipt;
 import entity.receipt.ReceiptStatus;
-import entity.user.User;
-import entity.user.UserRole;
 import frontcontroller.ServletCommand;
 import org.apache.log4j.Logger;
 import service.BookService;
 import service.ReceiptService;
 import service.SubscriptionService;
-import service.UserService;
 import util.MappingProperties;
-import util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 
 public class ApproveOrderPostCommand implements ServletCommand {
 
@@ -51,7 +45,7 @@ public class ApproveOrderPostCommand implements ServletCommand {
             subscriptionService.setEndTime(subscription,datetime);
             Receipt receipt = receiptService.getReceipt(Integer.valueOf(req.getParameter("receiptID")));
             receiptService.changeStatus(receipt, ReceiptStatus.SUBSCRIPTION.ordinal());
-            Book book=bookService.getBook(subscription.getBook_id());
+            Book book=bookService.getBook(subscription.getBookId());
             bookService.decreaseBookAmount(book);
             return approvePage;
         }

@@ -73,7 +73,7 @@ public class BookDaoImpl implements BookDao{
             pstmt.setString(1,book.getName());
             pstmt.setString(2,book.getAuthor());
             pstmt.setString(3,book.getEdition());
-            pstmt.setString(4,String.valueOf(book.getYear_edition()));
+            pstmt.setString(4,String.valueOf(book.getYearEdition()));
             pstmt.setString(5,String.valueOf(book.getAmount()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
@@ -102,7 +102,7 @@ public class BookDaoImpl implements BookDao{
             pstmt.setString(1,newBook.getName());
             pstmt.setString(2,newBook.getAuthor());
             pstmt.setString(3,newBook.getEdition());
-            pstmt.setString(4,String.valueOf(newBook.getYear_edition()));
+            pstmt.setString(4,String.valueOf(newBook.getYearEdition()));
             pstmt.setString(5,String.valueOf(newBook.getAmount()));
             pstmt.setString(6,String.valueOf(oldBook.getId()));
             pstmt.executeUpdate();

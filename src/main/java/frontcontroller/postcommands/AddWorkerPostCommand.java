@@ -34,7 +34,7 @@ public class AddWorkerPostCommand implements ServletCommand {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         User user=new User();
-        user.setRole_id(UserRole.WORKER.ordinal());
+        user.setRoleId(UserRole.WORKER.ordinal());
         if(email != null && email.length()>0) user.setEmail(email);
         if(password != null && password.length()>0) user.setPassword(EncryptionUtil.md5(password));
         if(name != null && name.length()>0) user.setName(name);

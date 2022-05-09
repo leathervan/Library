@@ -2,7 +2,6 @@ package dao.user;
 
 import connection.MyConnectionPool;
 import dao.QUERY;
-import dao.receipt.ReceiptDaoImpl;
 import entity.user.User;
 import org.apache.log4j.Logger;
 
@@ -75,7 +74,7 @@ public class UserDaoImpl implements UserDao {
             pstmt.setString(2,user.getPassword());
             pstmt.setString(3,user.getName());
             pstmt.setString(4,user.getSurname());
-            pstmt.setString(5,String.valueOf(user.getRole_id()));
+            pstmt.setString(5,String.valueOf(user.getRoleId()));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 log.error("User creation is failed");
@@ -104,7 +103,7 @@ public class UserDaoImpl implements UserDao {
             pstmt.setString(2,newUser.getPassword());
             pstmt.setString(3,newUser.getName());
             pstmt.setString(4,newUser.getSurname());
-            pstmt.setString(5,String.valueOf(newUser.getRole_id()));
+            pstmt.setString(5,String.valueOf(newUser.getRoleId()));
             pstmt.setString(6,String.valueOf(oldUser.getId()));
             pstmt.executeUpdate();
         }catch (SQLException e){
